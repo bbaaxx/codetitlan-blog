@@ -35,13 +35,9 @@ Steps to get a custom Node.js version running on OpenShift
 
 Create an account at http://openshift.redhat.com/
 
-Create a namespace, if you haven't already do so
+Create a nodejs application (you can call your application whatever you want)
 
-    rhc domain create <yournamespace>
-
-Create a nodejs-0.6 application (you can name it anything via -a)
-
-    rhc app create -a palinode  -t nodejs-0.6
+    rhc app create palinode nodejs-0.6
 
 Add this `github nodejs-custom-version-openshift` repository
 
