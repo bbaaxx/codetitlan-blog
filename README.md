@@ -42,7 +42,7 @@ Create a nodejs application (you can call your application whatever you want)
 Add this `github nodejs-custom-version-openshift` repository
 
     cd palinode
-    git remote add upstream -m master git://github.com/openshift/nodejs-custom-version-openshift.git
+    git remote add upstream -m master git://github.com/openshift-quickstart/nodejs-custom-version-openshift.git
     git pull -s recursive -X theirs upstream master
 
 Optionally, specify the custom version of Node.js you want to run with
