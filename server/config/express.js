@@ -49,11 +49,11 @@ module.exports = function(app) {
     app.use(express.static(path.join(config.root, 'app')));
   }
 
-  // if ('production' === env) {
-  //   app.use(compression());
-  //   app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
-  //   app.use(express.static(path.join(config.root, 'public')));
-  // }
+  if ('production' === env) {
+    app.use(compression());
+    // app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
+    app.use(express.static(path.join(config.root, 'app')));
+  }
 
 
 
