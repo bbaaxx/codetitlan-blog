@@ -18,7 +18,7 @@ var util = require('util');
 
 // es: Establece el entorno como "development" si no ha sido definido
 // en:  Set default node environment to development if not set before
-process.env.NODE_ENV = OPENSHIFT_GEAR_UUID ? 'production' : process.env.NODE_ENV || 'development';
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 // es: Importar variables de configuraciones del sistema
 // en: Import system config variables
 var config = require('./server/config/system');
