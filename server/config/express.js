@@ -13,7 +13,7 @@ var express = require('express'),
     morgan = require('morgan'),
     errorHandler = require('errorhandler'),
     // favicon = require('serve-favicon'),
-    // compress = require('compression'),
+    compress = require('compression'),
     // session = require('express-session'),
     // passport = require('passport'),
     // mongoStore = require('connect-mongo')(session),
@@ -50,7 +50,7 @@ module.exports = function(app) {
   }
 
   if ('production' === env) {
-    app.use(compression());
+    app.use(compress());
     // app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
     app.use(express.static(path.join(config.root, 'app')));
   }

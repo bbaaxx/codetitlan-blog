@@ -1,7 +1,7 @@
 {
-  "name": "codetitlan-blog",
-  "description": "A blog platform built from scratch",
-  "version": "0.0.1",
+  "name": "cdtlnas",
+  "description": "An API backend for Codetitlan",
+  "version": "0.2.0",
   "private": true,
   "author": "Eduardo M (bbaaxx)",
   "repository": {
