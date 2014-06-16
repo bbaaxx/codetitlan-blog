@@ -1,35 +1,44 @@
 {
-  "name": "OpenShift-Sample-App",
-  "version": "1.0.0",
-  "description": "OpenShift Sample Application",
-  "keywords": [
-    "OpenShift",
-    "Node.js",
-    "application",
-    "openshift"
-  ],
-  "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
-    "url":  "https://www.openshift.com/"
-  },
-  "homepage": "https://www.openshift.com/",
+  "name": "codetitlan-blog",
+  "description": "A blog platform built from scratch",
+  "version": "0.0.1",
+  "private": true,
+  "author": "Eduardo M (bbaaxx)",
   "repository": {
     "type": "git",
-    "url": "https://gitub.com/openshift/crankcase"
+    "url": "https://github.com/bbaaxx/codetitlan-blog.git"
   },
-
   "engines": {
-    "node": ">= 0.6.0",
-    "npm": ">= 1.0.0"
+    "node": "0.10.x",
+    "npm": "1.4.x"
   },
-
+  "main": "server.js",
+  "scripts": {
+    "start": "node node_modules/grunt-cli/bin/grunt",
+    "test": "node node_modules/grunt-cli/bin/grunt test",
+    "postinstall": "node node_modules/bower/bin/bower install"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "license": "DBAD",
   "dependencies": {
-    "express": "*"
+    "body-parser": "^1.3.0",
+    "bower": "^1.3.5",
+    "compression": "^1.0.6",
+    "consolidate": "^0.10.0",
+    "cookie-parser": "^1.1.0",
+    "ejs": "^1.0.0",
+    "errorhandler": "^1.0.2",
+    "express": "^4.4.1",
+    "express-session": "^1.2.1",
+    "lodash": "^2.4.1",
+    "method-override": "^2.0.2",
+    "morgan": "^1.1.1",
+    "serve-favicon": "^2.0.1",
+    "view-helpers": "^0.1.4"
   },
-  "devDependencies": {},
-  "bundleDependencies": [],
-
-  "private": true,
-  "main": "server.js"
+  "devDependencies": {
+    "connect-livereload": "^0.4.0"
+  }
 }

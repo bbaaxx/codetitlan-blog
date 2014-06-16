@@ -1,0 +1,9 @@
+.DS_Store
+.nodemonignore
+.sass-cache/
+.bower-*/
+node_modules/
+app/lib
+test/coverage
+npm-debug.log
+*.sublime-*

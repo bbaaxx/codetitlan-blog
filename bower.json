@@ -1,0 +1,21 @@
+{
+  "name": "cdtl-blog",
+  "main": "index.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/bbaaxx/codetitlan-blog",
+  "authors": [
+    "Eduardo M (bbaaxx) <bbaaxx@gmail.com>"
+  ],
+  "description": "The blog for codetitlan.org",
+  "license": "DBAD",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "app/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}
