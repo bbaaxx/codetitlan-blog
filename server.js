@@ -4,9 +4,11 @@
  * es: Dependencias | en: Module dependencies
  */
 
-var express = require('express');
-
-// TODO
+var express = require('express'); //,
+	// TODO
+	// fs = require('fs'),
+	// mongoose = require('mongoose');
+	
 // es: Importamos 'util' temporalmente para utilizar inspect en debug.
 // en: Temporarily import 'util' here to use inspect for debugging.
 var util = require('util');
@@ -25,6 +27,21 @@ var config = require('./server/config/system');
 // es: Iniciar conexión a base de datos e inicializar modelos
 // en: Initi database connection and bootstrap models
 // ************    TODO    ************
+// var db = mongoose.connect(config.mongo.uri, config.mongo.options);
+
+// // Bootstrap models
+// var modelsPath = path.join(__dirname, 'lib/models');
+// fs.readdirSync(modelsPath).forEach(function (file) {
+//   if (/(.*)\.(js$|coffee$)/.test(file)) {
+//     require(modelsPath + '/' + file);
+//   }
+// });
+
+// // Populate empty DB with sample data
+// require('./lib/config/dummydata');
+
+// // Passport Configuration
+// var passport = require('./lib/config/passport');
 
 // es: Configuración de la aplicación de express
 // en: Configure express app
@@ -39,6 +56,12 @@ require('./server/config/express')(app);
 // TODO: This has to run last before starting the server but I really don't
 //       like it to be in here.
 require('./server/routes')(app);
+
+// es: Configurar manejo de señales y terminadores para Openshift
+// en: Setup terminators and signal handler for Openshift
+if (process.env.NODE_ENV && process.env.NODE_ENV === 'production') {
+  config.openshift_terminator_handlers();
+};
 
 // es: Iniciar el servidor
 // en: Start server
