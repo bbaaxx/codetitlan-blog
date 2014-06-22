@@ -17,5 +17,13 @@
     "tests"
   ],
   "dependencies": {
+    "ember": "~1.5.1",
+    "modernizr": "~2.8.2",
+    "ember-data": "~0.0.14",
+    "ember-localstorage-adapter": "~0.3.1"
+  },
+  "resolutions": {
+    "ember": "~1.5.1",
+    "ember-data": ">= 1.0.0-beta.6"
   }
 }

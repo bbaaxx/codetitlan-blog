@@ -3,7 +3,8 @@
 //es: Aqui se importan los controladores
 //en: Importing controllers here
 var api = require('./controllers/api'),
-    index = require('./controllers/index'); //,
+    index = require('./controllers/index'),
+    sandbox = require('./controllers/sandbox'); //,
     // users = require('./controllers/users'),
     // session = require('./controllers/session'),
     // middleware = require('./middleware');
@@ -35,8 +36,8 @@ module.exports = function(app) {
   // // All other routes to use Angular routing in app/scripts/app.js
   // app.route('/partials/*')
   //   .get(home.partials);
-  app.route('/testie').get(index.index);
+  app.route('/sandbox*').get( sandbox.index );
   app.route('/*')
     //.get( middleware.setUserCookie, index.index);
-    .get(index.index);
+    .get( index.index );
 };

@@ -44,7 +44,10 @@ module.exports = function(app) {
       }
       next();
     });
-    app.use(express.static(path.join(config.root, 'app')));
+    // TODO: Need to fix these static paths !!
+    app.use('/lib',express.static(path.join(config.root, 'app/lib')));
+    app.use('/styles',express.static(path.join(config.root, 'app/styles')));
+    app.use('/js',express.static(path.join(config.root, 'app/js')));
   }
 
   if ('production' === env) {

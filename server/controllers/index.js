@@ -23,6 +23,15 @@
  * Send our single page app
  */
 exports.index = function(req, res) {
-  res.locals.thingie = "Dafuq";
-  res.render('index');
+
+  // es: Rendereo del template pasando referencia a los parciales.
+  // en: Render the template passing partials references.
+  res.render('index',{
+    // This sux a little !
+    partials: {
+      head:'partials/head',
+      tail:'partials/tail'
+    }
+  });
+
 };
