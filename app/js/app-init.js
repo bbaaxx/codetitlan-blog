@@ -1,5 +1,5 @@
 /*
- * app.js
+ * app-init.js
  */
 
 (function(){
@@ -8,5 +8,5 @@
   window.App = Ember.Application.create({
     LOG_TRANSITIONS: true
   });
-  
+
 })();
