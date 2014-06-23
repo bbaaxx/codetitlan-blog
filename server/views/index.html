@@ -1,80 +1,55 @@
-{{! 
-  Insert HTML head and change the default delimiters for Hogan
-}}
-{{>head}} 
-{{=<% %>=}}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
 
-  <!--
-  -->
-  <script type="text/x-handlebars">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{appTitle}}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 
+    <link rel="stylesheet" href="styles/css/main.css">
+     -->
+    <script src="lib/modernizr/modernizr.js"></script>
+</head>
 
-  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <section id="navbar" class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">{{appName}}</a>
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
+<body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-          {{#each item in mainMenu}}
-          <li>{{#link-to item}}go to:{{item}}{{/link-to}}</li>
-          {{/each}}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="app/lib/jquery/dist/jquery.min.js"><\/script>')
+    </script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="lib/handlebars/handlebars.js"></script>
+    <script src="lib/ember/ember.js"></script>
+    <script src="lib/ember-data/ember-data.js"></script>
 
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Nav header</li>
-              <li><a href="#">Separated link</a></li>
-              <li><a href="#">One more separated link</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </section>
-  </div>
-      {{outlet}}
-  </script>
+    <!--
+    <script src="lib/ember-localstorage-adapter/localstorage_adapter.js"></script>
+    -->
+    
+    <script src="js/app-init.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/controllers/application.js"></script>
+    <script src="js/controllers/index.js"></script>
+    <script src="js/controllers/emberlearn.js"></script>
+    <!--
+    <script src="js/store.js"></script>
+    <script src="js/models/user.js"></script>
+    -->
+    
 
-  <script type="text/x-handlebars" id="index">
-    <h1>{{title}}</h1>
-    <div class="main">
+</body>
 
-    </div>
-  </script>
-
-  <script type="text/x-handlebars" id="emberlearn">
-    <div class="main">
-    <h1>Woorf Woorf</h1>
-      
-      <h3>Listies and iteration</h3>
-      <ul>
-        {{#each dude in dudes}}
-        <li>{{dude}}</li>
-        {{/each}}
-      </ul>
-      
-      <h3>Scope change</h3>
-      {{#with dudlies}}
-      <p>{{d1}} is a friend of {{d2}} who does not like {{d3}}</p>
-      {{/with}}
-
-      <h3>Attributes</h3>
-      <p><a {{bind-attr href=someUrl}}>Linkie</a></p>
-    </div>
-  </script> 
-
-<%! 
-  Revert to default delimiters for Hogan and insert HTML tail
-%>
-<%={{ }}=%>
-{{>tail}}
+</html>

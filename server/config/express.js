@@ -71,6 +71,8 @@ module.exports = function(app) {
   // Use passport session
   // app.use(passport.initialize());
   // app.use(passport.session());
+
+  // Setting app title var here just for fun
   app.use(function setAppName(req,res,next) {
     res.locals.appTitle = config.app.name;
     next();

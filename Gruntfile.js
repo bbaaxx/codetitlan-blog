@@ -1,6 +1,11 @@
 /*global module:false*/
 module.exports = function(grunt) {
 
+  // Enable task-time reporting
+  if (process.env.NODE_ENV !== 'production') {
+    require('grunt-timer').init(grunt);
+  }
+
   // Project configuration.
   grunt.initConfig({
     // Metadata.
@@ -10,77 +15,97 @@ module.exports = function(grunt) {
       '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
       ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
+
     // Task configuration.
-    concat: {
-      options: {
-        banner: '<%= banner %>',
-        stripBanners: true
-      },
-      dist: {
-        src: ['lib/<%= pkg.name %>.js'],
-        dest: 'dist/<%= pkg.name %>.js'
-      }
+    clean: {
+      templates: [ 'app/js/templates.js' ],
     },
-    uglify: {
-      options: {
-        banner: '<%= banner %>'
-      },
-      dist: {
-        src: '<%= concat.dist.dest %>',
-        dest: 'dist/<%= pkg.name %>.min.js'
-      }
-    },
-    jshint: {
-      options: {
-        curly: true,
-        eqeqeq: true,
-        immed: true,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        sub: true,
-        undef: true,
-        unused: true,
-        boss: true,
-        eqnull: true,
-        browser: true,
-        globals: {
-          jQuery: true
+    concurrent: {
+      dev: {
+        tasks: [ 'nodemon:dev', 'watch' ],
+        options: {
+          logConcurrentOutput: true
         }
-      },
-      gruntfile: {
-        src: 'Gruntfile.js'
-      },
-      lib_test: {
-        src: ['app/lib/**/*.js', 'test/**/*.js']
       }
     },
-    qunit: {
-      files: ['test/**/*.html']
+    emberTemplates: {
+      compile: {
+        options: {
+          templateBasePath: /app\/js\/templates\//
+        },
+        files: {
+          'app/js/templates.js': 'app/js/templates/**/*.hbs'
+        }
+      }
+    },
+    gruntfile: {
+      src: 'Gruntfile.js'
+    },
+    nodemon: {
+      dev: {
+        script: 'server.js',
+        options: {
+          cwd: __dirname,
+          nodeArgs: [ '--debug' ],
+          delayTime: 1,
+          env: {
+            PORT:'9000',
+            NODE_ENV: 'development'
+          },
+          ignore: [ 'app/lib/', 'node_modules/', 'app/js/' ],
+          ext: 'js,html',
+          callback: function (nodemon) {
+            nodemon.on('log', function (event) {
+              console.log(event.colour);
+            });
+            nodemon.on('restart', function () {
+              setTimeout(function() {
+                require('fs').writeFileSync('.reboot', 'reboot');
+              }, 1000);
+            });
+          }
+        }
+      }
     },
     watch: {
-      gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
+      server: {
+        files: ['.reboot'],
+        options: { livereload: true }
       },
-      lib_test: {
-        files: '<%= jshint.lib_test.src %>',
-        tasks: ['jshint:lib_test', 'qunit']
+      templates: {
+        files: [ 'app/js/templates/**/*.hbs' ],
+        tasks: [ 'refreshTemplates' ],
+        options: { livereload: true }
+      },
+      js: {
+        files: ['app/js/**/*.js'],
+        options: { livereload: true }
+      },
+      gruntfile: {
+        files: ['Gruntfile.js'],
+        options: { reload: true }
       }
     }
   });
 
-  // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-qunit');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+  // Load grunt tasks automatically
+  //
+  // grunt-concurrent
+  // grunt-contrib-clean
+  // grunt-node-inspector
+  // grunt-ember-templates
+  // grunt-nodemon
+  require('load-grunt-tasks')( grunt, { pattern: [ 'grunt-*', '!grunt-timer' ] } );
 
   // Default task.
   grunt.registerTask('default', function(){
     console.log('Dudley');
   });
-  grunt.registerTask('build', ['jshint', 'qunit', 'concat', 'uglify']);
 
+  grunt.registerTask('refreshTemplates', ['clean:templates','emberTemplates']);
+  grunt.registerTask('dev', ['refreshTemplates','concurrent:dev']);
+  grunt.registerTask('build', ['clean']);
 };
+
+
+

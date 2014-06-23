@@ -57,9 +57,7 @@ exports.index = function(req, res) {
     // This sux a little !
     partials: {
       hogan_test:'sandbox/hogan_test',
-      dudu:'sandbox/dudu',
-      head:'partials/head',
-      tail:'partials/tail'
+      dudu:'sandbox/dudu'
     }
   });
 

@@ -7,3 +7,4 @@ app/lib
 test/coverage
 npm-debug.log
 *.sublime-*
+.reboot

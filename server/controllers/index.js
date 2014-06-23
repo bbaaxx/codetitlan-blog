@@ -24,14 +24,8 @@
  */
 exports.index = function(req, res) {
 
-  // es: Rendereo del template pasando referencia a los parciales.
-  // en: Render the template passing partials references.
-  res.render('index',{
-    // This sux a little !
-    partials: {
-      head:'partials/head',
-      tail:'partials/tail'
-    }
-  });
+  // es: Rendereo del template.
+  // en: Render the template.
+  res.render('index');
 
 };
