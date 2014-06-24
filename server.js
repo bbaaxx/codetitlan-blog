@@ -59,6 +59,7 @@ require('./server/routes')(app);
 
 // es: Configurar manejo de señales y terminadores para Openshift
 // en: Setup terminators and signal handler for Openshift
+// TODO - Fix this so it triggers exclusively when hosted in Openshit
 if (process.env.NODE_ENV && process.env.NODE_ENV === 'production') {
   config.openshift_terminator_handlers();
 };

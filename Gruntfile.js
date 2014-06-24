@@ -1,5 +1,26 @@
 /*global module:false*/
+
 module.exports = function(grunt) {
+  var path = require('path');
+
+  require('load-grunt-config')(grunt, {
+      configPath: path.join(process.cwd(), '.grunt'), //path to task.js files, defaults to grunt dir
+      init: true, //auto grunt.initConfig
+      data: { //data passed into config.  Can use with <%= test %>
+          test: false
+      },
+      loadGruntTasks: { //can optionally pass options to load-grunt-tasks.  If you set to false, it will disable auto loading tasks.
+          pattern: [ 'grunt-*', '!grunt-timer'],
+          config: require('./package.json'),
+          scope: 'devDependencies'
+      }
+  });
+
+};
+
+var prethingie = function(grunt) {
+
+  require('load-grunt-config')(grunt);
 
   // Enable task-time reporting
   if (process.env.NODE_ENV !== 'production') {
@@ -17,17 +38,6 @@ module.exports = function(grunt) {
       ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
 
     // Task configuration.
-    clean: {
-      templates: [ 'app/js/templates.js' ],
-    },
-    concurrent: {
-      dev: {
-        tasks: [ 'nodemon:dev', 'watch' ],
-        options: {
-          logConcurrentOutput: true
-        }
-      }
-    },
     emberTemplates: {
       compile: {
         options: {
@@ -67,6 +77,11 @@ module.exports = function(grunt) {
         }
       }
     },
+    perrito: { 
+      name: 'Bender',
+      breed: 'Beagle',
+      personality: 'Bunghole'
+    },
     watch: {
       server: {
         files: ['.reboot'],
@@ -88,21 +103,27 @@ module.exports = function(grunt) {
     }
   });
 
-  // Load grunt tasks automatically
-  //
-  // grunt-concurrent
-  // grunt-contrib-clean
-  // grunt-node-inspector
-  // grunt-ember-templates
-  // grunt-nodemon
+  // Load grunt tasks
   require('load-grunt-tasks')( grunt, { pattern: [ 'grunt-*', '!grunt-timer' ] } );
 
+  // Register internal tasks
+  grunt.registerTask('refreshTemplates', ['clean:templates','emberTemplates']);
+
+  // TODO - Remove this multitask
+  grunt.registerMultiTask('perrito', 'Does something really awesome', function(){
+    grunt.log.writeln(this.target + ' : ' + this.data);
+  });
+  
   // Default task.
-  grunt.registerTask('default', function(){
-    console.log('Dudley');
+  grunt.registerTask('default', 'Default task for development and CI', function(){
+    var done = this.async();
+    grunt.log.writeln('Dudley');
+    setTimeout(function() {
+      grunt.log.writeln('All done!');
+      done();
+    }, 1000);
   });
 
-  grunt.registerTask('refreshTemplates', ['clean:templates','emberTemplates']);
   grunt.registerTask('dev', ['refreshTemplates','concurrent:dev']);
   grunt.registerTask('build', ['clean']);
 };
