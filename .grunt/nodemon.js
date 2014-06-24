@@ -3,18 +3,14 @@
  */
 'use strict';
 
-var path = require('path');
-
 module.exports = function(grunt,options) {
-
   return {
 
     dev: {
-      
       script: 'server.js',
       options: {
         cwd: options.paths.root,
-        ignore: [ '.grunt/', 'app/lib/', 'node_modules/', 'app/js/' ],
+        ignore: options.sets.nodemonIgnore,
         ext: 'js,html',
 
         nodeArgs: [ '--debug' ],
@@ -34,9 +30,7 @@ module.exports = function(grunt,options) {
             }, 1000);
           });
         }
-
       }
-
     }
     
   }

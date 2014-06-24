@@ -19,6 +19,15 @@ module.exports = function(grunt,options) {
       files: ['app/js/**/*.js'],
       options: { livereload: true }
     },
+    scss: {
+      files: ['app/styles/scss/**/*.scss'],
+      tasks: ['compass:dev'],
+      options: { livereload: true }
+    },
+    css: {
+      files: ['app/styles/css/**/*.css'],
+      options: { livereload: true }
+    },
     gruntfile: {
       files: ['Gruntfile.js', '.grunt/'],
       options: { reload: true }

@@ -6,12 +6,13 @@
 module.exports = function(grunt,options) {
   return {
 
+    // TODO - Make absolute paths go away !
     compile: {
       options: {
         templateBasePath: /app\/js\/templates\//
       },
       files: {
-        'app/js/templates.js': 'app/js/templates/**/*.hbs'
+        'app/js/templates.js': options.sets.hbsRawTemplates
       }
     }
 
