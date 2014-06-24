@@ -1,20 +1,20 @@
 /*
  * /.grunt/metadata.js
  */
+'use strict';
 
-module.exports = function(grunt,options){
+module.exports = function(grunt,options) {
+  // console.log(options.package);
   return {
-    pkg: options.package,
-    banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
+
+    banner: '/*! <%= package.title || package.name %> - v<%= package.version %> - ' +
       '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-      '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-      '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-      ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
+      '<%= package.homepage ? "* " + package.homepage + "\\n" : "" %>' +
+      '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= package.author.name %>;' +
+      ' Licensed <%= _.pluck(package.licenses, "type").join(", ") %> */\n',
     gruntfile: {
       src: 'Gruntfile.js'
     }
+
   }
-
 };
-
-console.log(options);

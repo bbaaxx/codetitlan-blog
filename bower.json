@@ -1,7 +1,7 @@
 {
   "name": "cdtl-blog",
   "main": "index.js",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "homepage": "https://github.com/bbaaxx/codetitlan-blog",
   "authors": [
     "Eduardo M (bbaaxx) <bbaaxx@gmail.com>"
