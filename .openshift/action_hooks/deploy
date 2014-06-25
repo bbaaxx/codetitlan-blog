@@ -14,3 +14,8 @@ source "$OPENSHIFT_REPO_DIR/.openshift/lib/utils"
 #  installed.
 ensure_node_is_installed
 
+echo "************************************************************"
+echo "*			HEEEEEEE LOOOOOOO THIS IS MEEEE !!               *"
+echo "************************************************************"
+pwd
+npm start
