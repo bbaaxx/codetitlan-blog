@@ -18,4 +18,6 @@ echo "************************************************************"
 echo "*			HEEEEEEE LOOOOOOO THIS IS MEEEE !!               *"
 echo "************************************************************"
 pwd
+cd $OPENSHIFT_REPO_DIR
+pwd
 npm start
