@@ -19,9 +19,6 @@ var express = require('express'),
     // mongoStore = require('connect-mongo')(session),
     config = require('./system');
 
-// FOR DEBUG
-var util = require('util');
-
 module.exports = function(app) {
   var env = app.get('env');
   app.set('views', config.root + '/server/views');

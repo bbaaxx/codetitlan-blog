@@ -9,7 +9,7 @@ module.exports = {
   ipaddr: process.env.OPENSHIFT_INTERNAL_IP || process.env.OPENSHIFT_NODEJS_IP || '127.31.10.81',
   host: process.env.HOST || 'localhost',
 	db: 'Nothing here yet',
-	openshift_terminator_handlers: function() {
+	openshiftTerminatorHandlers: function() {
 		//  Process on exit and signals.
     var signals = ['SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 'SIGABRT',
                   'SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 'SIGUSR2', 'SIGTERM']

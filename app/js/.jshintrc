@@ -1,0 +1,7 @@
+{
+  "strict": true,
+  "globals": {
+    "Ember": true
+  },
+  "sub": true
+}

@@ -33,7 +33,7 @@ module.exports = function(grunt,options) {
       }
     },
     
-    dev: {
+    server: {
       options: {
         debugInfo: true
       }

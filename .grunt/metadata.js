@@ -11,7 +11,7 @@ module.exports = function(grunt,options) {
       '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
       '<%= package.homepage ? "* " + package.homepage + "\\n" : "" %>' +
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= package.author.name %>;' +
-      ' License: <%= _.pluck(package.licenses, "type").join(", ") %> */\n',
+      ' License: <%= package.license %> */\n',
     gruntfile: {
       src: 'Gruntfile.js'
     }

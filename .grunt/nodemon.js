@@ -9,17 +9,14 @@ module.exports = function(grunt,options) {
     dev: {
       script: 'server.js',
       options: {
-        cwd: options.paths.root,
-        ignore: options.sets.nodemonIgnore,
+        cwd: '<%= paths.root %>',
+        ignore: '<%= sets.nodemonIgnore %>',
         ext: 'js,html',
-
-        nodeArgs: [ '--debug' ],
         delayTime: 1,
         env: {
           PORT:'9000',
           NODE_ENV: 'development'
         },
-
         callback: function (nodemon) {
           nodemon.on('log', function (event) {
             console.log(event.colour);
@@ -28,6 +25,25 @@ module.exports = function(grunt,options) {
             setTimeout(function() {
               require('fs').writeFileSync('.reboot', 'reboot');
             }, 1000);
+          });
+        }
+      }
+    },
+    debug: {
+      script: 'server.js',
+      options: {
+        cwd: '<%= paths.root %>',
+        ignore: '<%= sets.nodemonIgnore %>',
+        ext: 'js,html',
+        nodeArgs: [ '--debug' ],
+        delayTime: 1,
+        env: {
+          PORT:'9000',
+          NODE_ENV: 'development'
+        },
+        callback: function (nodemon) {
+          nodemon.on('log', function (event) {
+            console.log(event.colour);
           });
         }
       }

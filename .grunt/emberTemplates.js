@@ -12,7 +12,7 @@ module.exports = function(grunt,options) {
         templateBasePath: /app\/js\/templates\//
       },
       files: {
-        'app/js/templates.js': options.sets.hbsRawTemplates
+        'app/js/templates.js': '<%= sets.hbsRawTemplates %>'
       }
     }
 

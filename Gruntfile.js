@@ -1,4 +1,5 @@
 /* global module:false */
+
 /*
  * Gruntfile.js
  */
@@ -6,7 +7,7 @@
 /*
  * Module dependencies
  */
-var path = require('path');
+var path  = require('path');
 
 var configData = {
   paths: {
@@ -36,11 +37,14 @@ var configData = {
 
 module.exports = function(grunt) {
 
-  // Enable task-time reporting
+  // es: Habilitar reporte de tiempos de tareas
+  // en: Enable task-time reporting
   if (process.env.NODE_ENV !== 'production') {
     require('grunt-timer').init(grunt);
   }
 
+  // es: Pasar opciones e inicializar configuración
+  // en: Pass options and init configuration
   require('load-grunt-config')(grunt, {
     configPath: path.join(process.cwd(), '.grunt'),
     init: true,
@@ -52,16 +56,38 @@ module.exports = function(grunt) {
     }
   });
 
-
+  // es: Definir tareas
+  // en: Define tasks
   grunt.registerTask('default', 'Default task for development and CI', function(){
+    // es: Tarea por defecto al ejecutar '$ grunt'
+    // en: default task executed by running '$ grunt'
+    grunt.task.run(['dev']);
+  });
+  grunt.registerTask('dev', 'Development task', function(target){
+    // es: Alias para desarrollo configurable vía targets
+    // en: Development task configurable via targets
+    var tasks = [
+      'clean:dev',
+      'wiredep',
+      'jshint:server',
+      'jshint:client',
+      'concurrent:server',
+      'autoprefixer:server'
+    ];
+    tasks = target==='debug'  ? tasks.concat(['concurrent:debug']) :
+            target==='client' ? tasks.concat(['express:dev','watch']) :
+            tasks.concat([ 'nodemon:dev', 'watch' ]);
+    return grunt.task.run(tasks);
+  });
+  grunt.registerTask('wait', function () {
+    // es: Usado para retrasar livereload hasta que el servodor este listo
+    // en: Used to delay livereload until after server has restarted
+    grunt.log.ok('Waiting for server reload...');
     var done = this.async();
-    
-    grunt.task.run('dev');
-    
-    setTimeout(function() {
-      grunt.log.writeln('All done!');
+    setTimeout(function () {
+      grunt.log.writeln('Done waiting!');
       done();
-    }, 1000);
+    }, 500);
   });
 
   // TODO - Remove this multitask example

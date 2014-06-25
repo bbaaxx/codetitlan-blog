@@ -15,7 +15,7 @@
     }.property('firstName', 'lastName'),
     // Observer that runs on init
     fullNameChanged: function() {
-      console.log('observer for fullName triggered')
+      console.log('observer for fullName triggered');
     }.observes('fullName').on('init'),
     
     // For Handlebars iterations and conditionals

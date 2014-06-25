@@ -56,7 +56,7 @@ exports.index = function(req, res) {
   res.render('sandbox',{
     // This sux a little !
     partials: {
-      hogan_test:'sandbox/hogan_test',
+      'hogan_test':'sandbox/hogan_test',
       dudu:'sandbox/dudu'
     }
   });

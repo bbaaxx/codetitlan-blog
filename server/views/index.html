@@ -13,7 +13,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bower:css -->
+    <link rel="stylesheet" href="../../app/lib/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
     <link rel="stylesheet" href="styles/css/main.css">
     <script src="lib/modernizr/modernizr.js"></script>
 </head>
@@ -23,17 +25,15 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script>
-        window.jQuery || document.write('<script src="app/lib/jquery/dist/jquery.min.js"><\/script>')
-    </script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="lib/handlebars/handlebars.js"></script>
-    <script src="lib/ember/ember.js"></script>
-    <script src="lib/ember-data/ember-data.js"></script>
-    <!--
-    <script src="lib/ember-localstorage-adapter/localstorage_adapter.js"></script>
-    -->
+    <!-- bower:js -->
+    <script src="../../app/lib/jquery/dist/jquery.js"></script>
+    <script src="../../app/lib/handlebars/handlebars.js"></script>
+    <script src="../../app/lib/ember/ember.js"></script>
+    <script src="../../app/lib/ember-data/ember-data.js"></script>
+    <script src="../../app/lib/ember-localstorage-adapter/localstorage_adapter.js"></script>
+    <script src="../../app/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- endbower -->
+
     <script src="js/app-init.js"></script>
     <script src="js/templates.js"></script>
     <script src="js/router.js"></script>

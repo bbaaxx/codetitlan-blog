@@ -9,10 +9,6 @@ var express = require('express'); //,
 	// fs = require('fs'),
 	// mongoose = require('mongoose');
 	
-// es: Importamos 'util' temporalmente para utilizar inspect en debug.
-// en: Temporarily import 'util' here to use inspect for debugging.
-var util = require('util');
-
 /*
  * es: Archivo de entrada para el servidor.
  * en: Main server entry file
@@ -61,8 +57,8 @@ require('./server/routes')(app);
 // en: Setup terminators and signal handler for Openshift
 // TODO - Fix this so it triggers exclusively when hosted in Openshit
 if (process.env.NODE_ENV && process.env.NODE_ENV === 'production') {
-  config.openshift_terminator_handlers();
-};
+  config.openshiftTerminatorHandlers();
+}
 
 // es: Iniciar el servidor
 // en: Start server

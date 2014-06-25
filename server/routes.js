@@ -2,7 +2,7 @@
 
 //es: Aqui se importan los controladores
 //en: Importing controllers here
-var api = require('./controllers/api'),
+var // api = require('./controllers/api'),
     index = require('./controllers/index'),
     sandbox = require('./controllers/sandbox'); //,
     // users = require('./controllers/users'),
