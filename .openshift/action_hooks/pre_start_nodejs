@@ -23,4 +23,10 @@ echo ""
 echo "  - pre_start_nodejs: Adding Node.js version $ver binaries to path"
 _SHOW_SETUP_PATH_MESSAGES="true" setup_path_for_custom_node_version
 
+#!/bin/bash
 export NODE_ENV=production
+
+# If there is a grunt file, run $ grunt build
+if [ -f "${OPENSHIFT_REPO_DIR}"/Gruntfile.js ]; then
+ (cd "${OPENSHIFT_REPO_DIR}"; node_modules/grunt-cli/bin/grunt build)
+fi
