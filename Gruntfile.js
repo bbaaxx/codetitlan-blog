@@ -13,6 +13,7 @@ var configData = {
   paths: {
     root          : path.join(__dirname),
     serverjs      : path.join(__dirname+'/server'),
+    app           : path.join(__dirname+'/app'),
     appjs         : path.join(__dirname+'/app/js'),
     applibs       : path.join(__dirname+'/app/lib'),
     scss          : path.join(__dirname+'/app/styles/scss'),
@@ -21,10 +22,10 @@ var configData = {
     images        : path.join(__dirname+'/app/styles/images'),
     genimages     : path.join(__dirname+'/app/styles/images/generated'),
     build         : path.join(__dirname+'/public'),
-    bldcss        : path.join(__dirname+'/public/css'),
+    bldcss        : path.join(__dirname+'/public/styles'),
     bldimages     : path.join(__dirname+'/public/images'),
     bldgenimages  : path.join(__dirname+'/public/images/generated'),
-    bldfonts      : path.join(__dirname+'/public/fonts')
+    bldfonts      : path.join(__dirname+'/public/styles/fonts')
   },
   sets: {
     hbsCompTemplates  : path.join(__dirname+'/public/js/generated') + '/templates.js',
@@ -61,24 +62,36 @@ module.exports = function(grunt) {
   grunt.registerTask('default', 'Default task for development and CI', function(){
     // es: Tarea por defecto al ejecutar '$ grunt'
     // en: default task executed by running '$ grunt'
-    grunt.task.run(['dev']);
+    grunt.task.run(['build']);
   });
   grunt.registerTask('dev', 'Development task', function(target){
     // es: Alias para desarrollo configurable vía targets
     // en: Development task configurable via targets
     var tasks = [
       'clean:dev',
-      'wiredep',
-      'jshint:server',
-      'jshint:client',
+      'jshintBuild',
       'concurrent:server',
-      'autoprefixer:server'
+      'autoprefixer'
     ];
     tasks = target==='debug'  ? tasks.concat(['concurrent:debug']) :
             target==='client' ? tasks.concat(['express:dev','watch']) :
             tasks.concat([ 'nodemon:dev', 'watch' ]);
     return grunt.task.run(tasks);
   });
+  grunt.registerTask('build', 'Building task', [
+    'jshintBuild',
+    'clean:build',
+    'compass:build',
+    'useminPrepare',
+    'concurrent:build',
+    'concat',
+    'copy:dist',
+    'cssmin',
+    'uglify',
+    'rev',
+    'usemin',
+    'clean:cleanup'
+  ]);
   grunt.registerTask('wait', function () {
     // es: Usado para retrasar livereload hasta que el servodor este listo
     // en: Used to delay livereload until after server has restarted

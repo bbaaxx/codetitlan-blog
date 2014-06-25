@@ -6,8 +6,8 @@
 module.exports = function(grunt,options) {
 
   return {
-    //dev: ['clean:dev', 'emberTemplates', 'compass:dev', 'concurrent:dev'],
-    refreshTemplates: ['clean:templates','emberTemplates']
+    refreshTemplates: ['clean:templates','emberTemplates'],
+    jshintBuild: ['jshint:server','jshint:client']
   }
 
 };

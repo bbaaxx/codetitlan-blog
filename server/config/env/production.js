@@ -6,7 +6,7 @@ module.exports = {
   },
   port: process.env.OPENSHIFT_INTERNAL_PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
   hostname: process.env.HOSTNAME || 'localhost',
-  ipaddr: process.env.OPENSHIFT_INTERNAL_IP || process.env.OPENSHIFT_NODEJS_IP || '127.31.10.81',
+  ipaddr: process.env.OPENSHIFT_INTERNAL_IP || process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
   host: process.env.HOST || 'localhost',
 	db: 'Nothing here yet',
 	openshiftTerminatorHandlers: function() {

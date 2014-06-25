@@ -7,15 +7,20 @@ module.exports = function(grunt,options) {
   return {
 
     build: {
-      src: [ '<%= paths.build %>/**/*' ]
+      src: [ 
+      '<%= paths.root %>/.tmp/**',
+      '<%= paths.css %>/**/*',
+      '<%= paths.build %>/**/*', 
+      '<%= paths.build %>/**/.*' ]
     },
     dev: {
       src: [ '<%= paths.css %>/**/*', '<%= sets.hbsCompTemplates %>' ]
     },
     templates: {
-      src: [
-        options.sets.hbsCompTemplates
-      ]
+      src: [ '<%= sets.hbsCompTemplates %>' ]
+    },
+    cleanup: {
+      src: ['<%= paths.root %>/.tmp']
     }
     
   }

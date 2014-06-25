@@ -3,38 +3,32 @@
  */
 'use strict';
 
-var path = require('path');
-
 module.exports = function(grunt,options) {
-
-  var p = options.paths;
-  
   return {
 
     options: {
-      sassDir                 : p.scss,
-      cssDir                  : p.css,
-      generatedImagesDir      : p.genimages,
-      imagesDir               : p.images,
-      javascriptsDir          : p.appjs,
-      fontsDir                : p.fonts,
-      importPath              : p.applibs,
-      httpImagesPath          : p.bldimages,
-      httpGeneratedImagesPath : p.bldgenimages,
-      httpFontsPath           : p.bldfonts,
+      sassDir                 : '<%= paths.scss %>',
+      cssDir                  : '<%= paths.css %>',
+      generatedImagesDir      : '<%= paths.genimages %>',
+      imagesDir               : '<%= paths.images %>',
+      javascriptsDir          : '<%= paths.appjs %>',
+      fontsDir                : '<%= paths.fonts %>',
+      importPath              : '<%= paths.applibs %>',
+      httpImagesPath          : '<%= paths.bldimages %>',
+      httpGeneratedImagesPath : '<%= paths.bldgenimages %>',
+      httpFontsPath           : '<%= paths.bldfonts %>',
       relativeAssets          : false,
       assetCacheBuster        : false,
       raw                     : 'Sass::Script::Number.precision = 10\n'
     },
-
-    dist: {
+    build: {
       options: {
-        generatedImagesDir: p.genimages
+        environment: 'production'
       }
     },
-    
-    server: {
+    dev: {
       options: {
+        environment: 'development',
         debugInfo: true
       }
     }

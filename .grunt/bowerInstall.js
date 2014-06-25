@@ -1,5 +1,5 @@
 /*
- * /.grunt/wiredep.js
+ * /.grunt/bowerInstall.js
  */
 'use strict';
 
@@ -8,7 +8,7 @@ module.exports = function(grunt,options) {
 
     target: {
       src: ['<%= paths.serverjs %>/views/index.html'],
-      cwd: '',
+      // cwd: '<%= paths.app %>',
       dependencies: true,
       devDependencies: false,
       exclude: ['modernizr'],

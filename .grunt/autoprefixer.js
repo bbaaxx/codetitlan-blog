@@ -9,17 +9,10 @@ module.exports = function(grunt,options) {
     options: {
       browsers: ['last 1 version']
     },
-    build: {
+    dev: {
       files: [{
         expand: true,
-        cwd: '<%= paths.css %>',
-        src: '{,*/}*.css',
-        dest: '<%= paths.bldcss %>'
-      }]
-    },
-    server: {
-      files: [{
-        expand: true,
+        flatten: true,
         cwd: '<%= paths.css %>',
         src: '{,*/}*.css',
         dest: '<%= paths.css %>'

@@ -21,15 +21,12 @@ var express = require('express'),
 
 module.exports = function(app) {
   var env = app.get('env');
-  app.set('views', config.root + '/server/views');
-  app.engine('html', consolidate[config.templateEngines]);
-  app.set('view engine', 'html');
+  
 
-  app.use(bodyParser());
-  app.use(methodOverride());
-  app.use(cookieParser());
+
 
   if ('development' === env) {
+    app.set('views', config.root + '/server/views');
     app.use(morgan('dev'));
     app.use(require('connect-livereload')());
     // Disable caching of scripts for easier testing
@@ -41,18 +38,20 @@ module.exports = function(app) {
       }
       next();
     });
-    // TODO: Need to fix these static paths !!
-    app.use('/lib',express.static(path.join(config.root, 'app/lib')));
-    app.use('/styles',express.static(path.join(config.root, 'app/styles')));
-    app.use('/js',express.static(path.join(config.root, 'app/js')));
-  }
-
-  if ('production' === env) {
-    app.use(compress());
-    app.use(favicon(path.join(config.root, 'app', 'favicon.ico')));
     app.use(express.static(path.join(config.root, 'app')));
   }
 
+  if ('production' === env) {
+    app.set('views', config.root + '/public/views');
+    app.use(compress());
+    app.use(favicon(path.join(config.root, 'app', 'favicon.ico')));
+    app.use(express.static(path.join(config.root, 'public')));
+  }
+  app.engine('html', consolidate[config.templateEngines]);
+  app.set('view engine', 'html');
+  app.use(bodyParser());
+  app.use(methodOverride());
+  app.use(cookieParser());
 
   // Persist sessions with mongoStore
   // app.use(session({

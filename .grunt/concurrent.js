@@ -8,7 +8,7 @@ module.exports = function(grunt,options) {
 
     server: {
       tasks: [
-        'compass:server', 
+        'compass:dev', 
         'emberTemplates' 
       ]
     },
@@ -23,6 +23,17 @@ module.exports = function(grunt,options) {
         'nodemon:debug',
         'node-inspector',
         'watch'
+      ],
+      options: {
+        logConcurrentOutput: true
+      }
+    },
+    build: {
+      tasks: [
+        'autoprefixer',
+        'imagemin',
+        'svgmin',
+        'htmlmin'
       ],
       options: {
         logConcurrentOutput: true
