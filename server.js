@@ -57,7 +57,7 @@ require('./server/routes')(app);
 // en: Setup terminators and signal handler for Openshift
 // TODO - Fix this so it triggers exclusively when hosted in Openshit
 if (process.env.NODE_ENV && process.env.NODE_ENV === 'production') {
-  config.openshiftTerminatorHandlers();
+  config.terminatorHandlers();
 }
 
 // es: Iniciar el servidor

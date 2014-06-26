@@ -22,9 +22,6 @@ var express = require('express'),
 module.exports = function(app) {
   var env = app.get('env');
   
-
-
-
   if ('development' === env) {
     app.set('views', config.root + '/server/views');
     app.use(morgan('dev'));
@@ -44,7 +41,7 @@ module.exports = function(app) {
   if ('production' === env) {
     app.set('views', config.root + '/public/views');
     app.use(compress());
-    app.use(favicon(path.join(config.root, 'app', 'favicon.ico')));
+    app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
     app.use(express.static(path.join(config.root, 'public')));
   }
   app.engine('html', consolidate[config.templateEngines]);

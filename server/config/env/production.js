@@ -4,12 +4,12 @@ module.exports = {
   app: {
       name: 'Codetitilan Application Server & Backend'
   },
-  port: process.env.OPENSHIFT_INTERNAL_PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
+  port: process.env.OPENSHIFT_INTERNAL_PORT || process.env.OPENSHIFT_NODEJS_PORT || process.env.VCAP_APP_PORT || 8080,
   hostname: process.env.HOSTNAME || 'localhost',
-  ipaddr: process.env.OPENSHIFT_INTERNAL_IP || process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
-  host: process.env.HOST || 'localhost',
+  ipaddr: process.env.OPENSHIFT_INTERNAL_IP || process.env.OPENSHIFT_NODEJS_IP || process.env.VCAP_APP_HOST || '127.0.0.1',
+  host: process.env.HOST || process.env.VCAP_APP_HOST || 'localhost',
 	db: 'Nothing here yet',
-	openshiftTerminatorHandlers: function() {
+	terminatorHandlers: function() {
 		//  Process on exit and signals.
     var signals = ['SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 'SIGABRT',
                   'SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 'SIGUSR2', 'SIGTERM']
