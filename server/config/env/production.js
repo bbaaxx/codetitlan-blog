@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+  env: 'production',
   app: {
       name: 'Codetitilan Application Server & Backend'
   },
@@ -8,7 +9,10 @@ module.exports = {
   hostname: process.env.HOSTNAME || 'localhost',
   ipaddr: process.env.OPENSHIFT_INTERNAL_IP || process.env.OPENSHIFT_NODEJS_IP || process.env.VCAP_APP_HOST || '127.0.0.1',
   host: process.env.HOST || process.env.VCAP_APP_HOST || 'localhost',
-	db: 'Nothing here yet',
+	mongo: {
+    uri: 'mongodb://FILL PRODUCTION DB DATA'
+  },
+
 	terminatorHandlers: function() {
 		//  Process on exit and signals.
     var signals = ['SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 'SIGABRT',
@@ -27,4 +31,5 @@ module.exports = {
         process.on(sig, function() { terminator(sig); });
     });
   }
+
 };

@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+  env: 'development',
   app: {
       name: 'Codetitilan Application Server & Backend - (Development)'
   },
@@ -8,5 +9,7 @@ module.exports = {
   hostname: process.env.HOSTNAME || 'localhost',
   ipaddr: process.env.IP || '0.0.0.0',
   host: process.env.HOST || 'localhost',
-  db: 'Nothing here yet'
+  mongo: {
+  	uri: 'mongodb://localhost/codetitlan-blog-dev'
+  }
 };

@@ -14,15 +14,30 @@ var express = require('express'),
     errorHandler = require('errorhandler'),
     favicon = require('serve-favicon'),
     compress = require('compression'),
-    // session = require('express-session'),
-    // passport = require('passport'),
-    // mongoStore = require('connect-mongo')(session),
+    session = require('express-session'),
+    passport = require('passport'),
+    mongoStore = require('connect-mongo')(session),
     config = require('./system');
+
 
 module.exports = function(app) {
   var env = app.get('env');
   
   if ('development' === env) {
+// FOR DEBUGGING PURPOSES ONLY ///////////////////////////////////////////////
+    var winston = require('winston'),
+        expressWinston = require('express-winston');
+    app.use(expressWinston.logger({
+      transports: [
+        new winston.transports.Console({
+          json: true,
+          colorize: true
+        })
+      ],
+      meta: false, //, log meta data about the request (default to true)
+      msg: "HTTP {{req.method}} {{req.url}}" // customize the default logging message. E.g. "{{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}"
+    }));
+//////////////////////////////////////////////////////////////////////////////
     app.set('views', config.root + '/server/views');
     app.use(morgan('dev'));
     app.use(require('connect-livereload')());
@@ -44,6 +59,7 @@ module.exports = function(app) {
     app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
     app.use(express.static(path.join(config.root, 'public')));
   }
+  
   app.engine('html', consolidate[config.templateEngines]);
   app.set('view engine', 'html');
   app.use(bodyParser());
@@ -51,15 +67,15 @@ module.exports = function(app) {
   app.use(cookieParser());
 
   // Persist sessions with mongoStore
-  // app.use(session({
-  //   secret: 'angular-fullstack secret',
-  //   store: new mongoStore({
-  //     url: config.mongo.uri,
-  //     collection: 'sessions'
-  //   }, function () {
-  //     console.log('db connection open');
-  //   })
-  // }));
+  app.use(session({
+    secret: 'angular-fullstack secret',
+    store: new mongoStore({
+      url: config.mongo.uri,
+      collection: 'sessions'
+    }, function () {
+      console.log('Session Store online');
+    })
+  }));
 
   // Use passport session
   // app.use(passport.initialize());
@@ -73,5 +89,15 @@ module.exports = function(app) {
   // Error handler - has to be last
   if ('development' === app.get('env')) {
     app.use(errorHandler());
+// FOR DEBUGGING PURPOSES ONLY ///////////////////////////////////////////////
+    app.use(expressWinston.errorLogger({
+      transports: [
+        new winston.transports.Console({
+          json: true,
+          colorize: true
+        })
+      ]
+    }));
+//////////////////////////////////////////////////////////////////////////////
   }
 };

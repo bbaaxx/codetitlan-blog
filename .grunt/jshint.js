@@ -12,6 +12,7 @@ module.exports = function(grunt,options) {
     },
     server: {
       options: {
+        force: true
         //jshintrc: 'server/.jshintrc'
       },
       src: [ 

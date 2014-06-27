@@ -5,5 +5,12 @@ var rootPath = path.normalize(__dirname + '/../../..');
 module.exports = {
   root: rootPath,
   dbType: 'none yet',
-  templateEngines: ['hogan']
+  templateEngines: ['hogan'],
+  mongo: {
+    options: {
+      db: {
+        safe: true
+      }
+    }
+  }
 };
