@@ -1,31 +1,20 @@
 'use strict';
 
-// var path = require('path');
+exports.render = function(req, res) {
 
-/**
- * Send partial, or 404 if it doesn't exist
- */
-// exports.partials = function(req, res) {
-//   var stripped = req.url.split('.')[0];
-//   var requestedView = path.join('./', stripped);
-//   res.render(requestedView, function(err, html) {
-//     if(err) {
-//       console.log("Error rendering partial '" + requestedView + "'\n", err);
-//       res.status(404);
-//       res.send(404);
-//     } else {
-//       res.send(html);
-//     }
-//   });
-// };
+  var userViewObj = req.user ? {
+    name: req.user.name,
+    _id: req.user._id,
+    username: req.user.username,
+    roles: req.user.roles
+  } : {};
 
-/**
- * Send our single page app
- */
-exports.index = function(req, res) {
-
+  
   // es: Rendereo del template.
   // en: Render the template.
-  res.render('index');
+  res.render('index', {
+    appTitle: 'Codetitlan, estamos pensando',
+    user: JSON.stringify(userViewObj)
+  });
 
 };

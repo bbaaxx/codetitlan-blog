@@ -1,47 +1,39 @@
+/*
+ * server/config/express.js
+ */
 'use strict';
 
 /*
  * es: Dependencias | en: Module dependencies
  */
+var express          = require('express'),
+    favicon          = require('serve-favicon'),
+    morgan           = require('morgan'),
+    compress         = require('compression'),
+    bodyParser       = require('body-parser'),
+    methodOverride   = require('method-override'),
+    cookieParser     = require('cookie-parser'),
+    session          = require('express-session'),
+    errorHandler     = require('errorhandler'),
+    consolidate      = require('consolidate'),
+    flash            = require('connect-flash'),
+    helpers          = require('view-helpers'),
+    expressValidator = require('express-validator'),
+    mongoStore       = require('connect-mongo')(session),
+    path             = require('path'),
+    fs               = require('fs'),
+    passport         = require('passport'),
+    config           = require('./config'),
+    utils            = require('./utils');
 
-var express = require('express'),
-    path = require('path'),
-    bodyParser = require('body-parser'),
-    methodOverride = require('method-override'),
-    cookieParser = require('cookie-parser'),
-    consolidate = require('consolidate'),
-    morgan = require('morgan'),
-    errorHandler = require('errorhandler'),
-    favicon = require('serve-favicon'),
-    compress = require('compression'),
-    session = require('express-session'),
-    passport = require('passport'),
-    mongoStore = require('connect-mongo')(session),
-    config = require('./system');
-
-
-module.exports = function(app) {
+module.exports = function(app,passport,db) {
   var env = app.get('env');
-  
+  app.set('showStackError', true);
+
+
+  // Setting views dir, caching and logging depending on env 
   if ('development' === env) {
-// FOR DEBUGGING PURPOSES ONLY ///////////////////////////////////////////////
-    var winston = require('winston'),
-        expressWinston = require('express-winston');
-    app.use(expressWinston.logger({
-      transports: [
-        new winston.transports.Console({
-          json: true,
-          colorize: true
-        })
-      ],
-      meta: false, //, log meta data about the request (default to true)
-      msg: "HTTP {{req.method}} {{req.url}}" // customize the default logging message. E.g. "{{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}"
-    }));
-//////////////////////////////////////////////////////////////////////////////
     app.set('views', config.root + '/server/views');
-    app.use(morgan('dev'));
-    app.use(require('connect-livereload')());
-    // Disable caching of scripts for easier testing
     app.use(function noCache(req, res, next) {
       if (req.url.indexOf('/scripts/') === 0) {
         res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -51,53 +43,93 @@ module.exports = function(app) {
       next();
     });
     app.use(express.static(path.join(config.root, 'app')));
+    app.use(morgan('dev'));
+    app.use(require('connect-livereload')());
   }
-
   if ('production' === env) {
     app.set('views', config.root + '/public/views');
-    app.use(compress());
-    app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
+    app.use(compress({ level: 9 }));
     app.use(express.static(path.join(config.root, 'public')));
+    app.use(favicon(config.root +  '/public/favicon.ico'));
   }
   
+  // Set up templating engine
   app.engine('html', consolidate[config.templateEngines]);
   app.set('view engine', 'html');
-  app.use(bodyParser());
-  app.use(methodOverride());
+
+  // enable JSONp and use all parsing validating and overriding middlewares
+  app.enable('jsonp callback');
   app.use(cookieParser());
+  app.use(expressValidator());
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(methodOverride());
 
   // Persist sessions with mongoStore
   app.use(session({
-    secret: 'angular-fullstack secret',
     store: new mongoStore({
       url: config.mongo.uri,
       collection: 'sessions'
-    }, function () {
-      console.log('Session Store online');
-    })
+    }),
+    secret: 'There is no coincidence, only hitzusen - Yukko',
+    cookie: config.sessionCookie,
+    name: config.sessionName,
+    resave: true,
+    saveUninitialized: true,
   }));
+  app.use(helpers(config.app.name));
 
   // Use passport session
-  // app.use(passport.initialize());
-  // app.use(passport.session());
+  app.use(passport.initialize());
+  app.use(passport.session());
 
-  // Setting app title var here just for fun
-  app.use(function setAppName(req,res,next) {
-    res.locals.appTitle = config.app.name;
-    next();
+  // use connect-flash for flash messages
+  app.use(flash());
+
+  /*
+    Place below this comment, all middleware that runs BEFORE the routes
+    ----------------------------------------------------------------------
+  */
+  /*    Bootstrap routes    */
+
+  function bootstrapRoutes() {
+    // Skip the app/routes/middlewares directory as it is meant to be
+    // used and shared by routes as further middlewares and is not a
+    // route by itself
+    utils.walk(config.root + '/server', 'route', 'middlewares', function(path) {
+      require(path)(app, passport);
+    });
+  }
+
+  bootstrapRoutes();
+  /*
+    Place below this comment, all middleware that runs AFTER the routes
+    ----------------------------------------------------------------------
+  */
+
+  // Assume "not found" in the error msgs is a 404. this is somewhat
+  // silly, but valid, you can do whatever you like, set properties,
+  // use instanceof etc (taken from mean.io).
+  app.use(function(err, req, res, next) {
+      // Treat as 404
+      if (~err.message.indexOf('not found')) return next();
+      // Log it
+      console.error(err.stack);
+      // Error page
+      res.status(500).render('500', {
+          error: err.stack
+      });
   });
+  // Assume 404 since no middleware responded
+  app.use(function(req, res) {
+      res.status(404).render('404', {
+          url: req.originalUrl,
+          error: 'Not found'
+      });
+  });
+
   // Error handler - has to be last
   if ('development' === app.get('env')) {
     app.use(errorHandler());
-// FOR DEBUGGING PURPOSES ONLY ///////////////////////////////////////////////
-    app.use(expressWinston.errorLogger({
-      transports: [
-        new winston.transports.Console({
-          json: true,
-          colorize: true
-        })
-      ]
-    }));
-//////////////////////////////////////////////////////////////////////////////
   }
 };
