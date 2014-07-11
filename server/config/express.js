@@ -27,21 +27,15 @@ var express          = require('express'),
     utils            = require('./utils');
 
 module.exports = function(app,passport,db) {
+  // es: sincronizar env con el entorno de la aplicación
+  // es: sync the env var with the app environment
   var env = app.get('env');
-  app.set('showStackError', true);
 
 
-  // Setting views dir, caching and logging depending on env 
+  // en: Setting views dir, caching and logging and options depending on env
   if ('development' === env) {
+    app.set('showStackError', true);
     app.set('views', config.root + '/server/views');
-    app.use(function noCache(req, res, next) {
-      if (req.url.indexOf('/scripts/') === 0) {
-        res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
-        res.header('Pragma', 'no-cache');
-        res.header('Expires', 0);
-      }
-      next();
-    });
     app.use(express.static(path.join(config.root, 'app')));
     app.use(morgan('dev'));
     app.use(require('connect-livereload')());
@@ -52,6 +46,18 @@ module.exports = function(app,passport,db) {
     app.use(express.static(path.join(config.root, 'public')));
     app.use(favicon(config.root +  '/public/favicon.ico'));
   }
+  if ('test' === env) {
+    app.set('views', config.root + '/server/views');
+    app.use(function noCache(req, res, next) {
+      if (req.url.indexOf('/scripts/') === 0) {
+        res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.header('Pragma', 'no-cache');
+        res.header('Expires', 0);
+      }
+      next();
+    });
+    app.use(express.static(path.join(config.root, 'app')));
+  }
   
   // Set up templating engine
   app.engine('html', consolidate[config.templateEngines]);
@@ -60,9 +66,9 @@ module.exports = function(app,passport,db) {
   // enable JSONp and use all parsing validating and overriding middlewares
   app.enable('jsonp callback');
   app.use(cookieParser());
-  app.use(expressValidator());
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(expressValidator());
   app.use(methodOverride());
 
   // Persist sessions with mongoStore
@@ -96,11 +102,11 @@ module.exports = function(app,passport,db) {
     // Skip the app/routes/middlewares directory as it is meant to be
     // used and shared by routes as further middlewares and is not a
     // route by itself
-    utils.walk(config.root + '/server', 'route', 'middlewares', function(path) {
+    utils.walk(config.root+'/server','route','middlewares',function(path) {
       require(path)(app, passport);
     });
   }
-
+  // TODO - somehow I don't like the way this function works
   bootstrapRoutes();
   /*
     Place below this comment, all middleware that runs AFTER the routes

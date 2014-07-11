@@ -32,15 +32,16 @@ var lotsOfShits = {
  */
 exports.index = function(req, res) {
 
-  var adminCheck = function() {
-      return req.user && req.user.roles.indexOf('admin') !== -1;
+  var incPartials = {
+    login      : 'sandbox/loginfrm',
+    'hogan_test'  : 'sandbox/hogan_test',
+    dudu          : 'sandbox/dudu'
   };
   var passUser = req.user ? {
     name: req.user.name,
     _id: req.user._id,
     username: req.user.username,
-    roles: req.user.roles,
-    isAdmin: adminCheck()
+    roles: req.user.roles
   } : {};
   var sess = req.session;
 
@@ -49,15 +50,12 @@ exports.index = function(req, res) {
   res.render('sandbox',{
     appTitle: 'Codetitlan, estamos jugando',
     // You have to declare the partials here which sucks a little bit
-    partials: {
-      'hogan_test':'sandbox/hogan_test',
-      dudu:'sandbox/dudu'
-    },
+    partials: incPartials,
     // Passing the object we created up there
     mst: lotsOfShits,
     // passing some of the stuff of the user object to the view
     user: JSON.stringify(passUser),
-    isAdmin: adminCheck(),
     sess: JSON.stringify(sess)
   });
 };
+

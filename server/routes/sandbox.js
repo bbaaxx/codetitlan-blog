@@ -10,6 +10,7 @@ var sandbox = require('../controllers/sandbox');
  */
 module.exports = function(app) {
 
-  app.route('/sandbox').get( sandbox.index );
-  
+  app.route('/sandbox')
+    .get( sandbox.index );
+
 };

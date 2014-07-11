@@ -28,6 +28,6 @@ module.exports = {
   },
 
   // The session cookie name
-  sessionName: 'connect.sid'
+  sessionName: 'codetitlan.sid'
 
 };

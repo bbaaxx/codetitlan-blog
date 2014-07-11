@@ -7,7 +7,7 @@
 /**
  * Custom middleware used by the application
  */
-module.exports = {
+// module.exports = {
 
   /**
    *  Protect routes on your api from unauthenticated access
@@ -26,7 +26,7 @@ module.exports = {
   //   }
   //   next();
   // }
-};
+// };
 
 /**
 * Generic require login routing middleware
@@ -48,3 +48,10 @@ exports.requiresAdmin = function(req, res, next) {
     }
     next();
 };
+
+exports.setUserCookie = function(req, res, next) {
+  if(req.user) {
+    res.cookie('user', JSON.stringify(req.user.userInfo));
+  }
+  next();
+}

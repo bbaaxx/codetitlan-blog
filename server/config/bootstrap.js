@@ -5,26 +5,32 @@
  'use strict';
 
 var express = require('express'),
-    config = require('./config'),
-    utils = require('./utils');
+    config  = require('./config'),
+    utils   = require('./utils');
   
 module.exports = function(passport, db) {
 
+  // es: Inicializa los modelos de la db
+  // es: Bootstrap db models
   function bootstrapModels(){
     utils.walk(config.root + '/server', 'model', null, function(path) {
         require(path);
     });
   }
+  // TODO - Looks a bit ugly to call the function like this
   bootstrapModels();
 
-  // Bootstrap passport config
+  // es: Inicializa la configuración de passport
+  // en: Bootstrap passport config
   require(config.root + '/server/config/passport')(passport);
 
-  // Express settings
+  // es: Inicializa la app Express
+  // en: Bootstrap Express app
   var app = express();
-
   require(config.root + '/server/config/express')(app, passport, db);
 
+  // es: Regresa app
+  // en: Return the app
   return app;
 
 };
