@@ -21,12 +21,10 @@ var express          = require('express'),
     expressValidator = require('express-validator'),
     mongoStore       = require('connect-mongo')(session),
     path             = require('path'),
-    fs               = require('fs'),
-    passport         = require('passport'),
     config           = require('./config'),
     utils            = require('./utils');
 
-module.exports = function(app,passport,db) {
+module.exports = function(app,passport) {
   // es: sincronizar env con el entorno de la aplicación
   // es: sync the env var with the app environment
   var env = app.get('env');
@@ -118,7 +116,7 @@ module.exports = function(app,passport,db) {
   // use instanceof etc (taken from mean.io).
   app.use(function(err, req, res, next) {
       // Treat as 404
-      if (~err.message.indexOf('not found')) return next();
+      if (~err.message.indexOf('not found')) { return next(); }
       // Log it
       console.error(err.stack);
       // Error page

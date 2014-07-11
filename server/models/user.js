@@ -37,7 +37,7 @@ var UserSchema = new Schema({
     type: Array,
     default: ['authenticated']
   },
-  hashed_password: {
+  hashedPassword: {
     type: String,
     validate: [validatePresenceOf, 'Password cannot be blank']
   },
@@ -59,7 +59,7 @@ var UserSchema = new Schema({
 UserSchema.virtual('password').set(function(password) {
   this._password = password;
   this.salt = this.makeSalt();
-  this.hashed_password = this.hashPassword(password);
+  this.hashedPassword = this.hashPassword(password);
 }).get(function() {
   return this._password;
 });
@@ -68,8 +68,9 @@ UserSchema.virtual('password').set(function(password) {
 * Pre-save hook
 */
 UserSchema.pre('save', function(next) {
-  if (this.isNew && this.provider === 'local' && this.password && !this.password.length)
+  if (this.isNew && this.provider === 'local' && this.password && !this.password.length) {
     return next(new Error('Invalid password'));
+  }
   next();
 });
 
@@ -108,7 +109,7 @@ UserSchema.methods = {
 * @api public
 */
   authenticate: function(plainText) {
-    return this.hashPassword(plainText) === this.hashed_password;
+    return this.hashPassword(plainText) === this.hashedPassword;
   },
 
   /**
@@ -129,7 +130,7 @@ UserSchema.methods = {
 * @api public
 */
   hashPassword: function(password) {
-    if (!password || !this.salt) return '';
+    if (!password || !this.salt) { return ''; }
     var salt = new Buffer(this.salt, 'base64');
     return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
   }

@@ -8,7 +8,7 @@ var express = require('express'),
     config  = require('./config'),
     utils   = require('./utils');
   
-module.exports = function(passport, db) {
+module.exports = function(passport) {
 
   // es: Inicializa los modelos de la db
   // es: Bootstrap db models
@@ -27,7 +27,7 @@ module.exports = function(passport, db) {
   // es: Inicializa la app Express
   // en: Bootstrap Express app
   var app = express();
-  require(config.root + '/server/config/express')(app, passport, db);
+  require(config.root + '/server/config/express')(app, passport);
 
   // es: Regresa app
   // en: Return the app

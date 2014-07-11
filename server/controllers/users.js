@@ -75,7 +75,7 @@ exports.create = function(req, res, next) {
             return res.status(400);
         }
         req.logIn(user, function(err) {
-            if (err) return next(err);
+            if (err) { return next(err); }
             return res.redirect('/');
         });
         res.status(200);
@@ -97,8 +97,8 @@ exports.user = function(req, res, next, id) {
             _id: id
         })
         .exec(function(err, user) {
-            if (err) return next(err);
-            if (!user) return next(new Error('Failed to load User ' + id));
+            if (err) { return next(err); }
+            if (!user) { return next(new Error('Failed to load User ' + id)); }
             req.profile = user;
             next();
         });
