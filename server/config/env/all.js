@@ -1,5 +1,11 @@
-'use strict';
+/*
+ * server/config/env/all.js
+ */
+ 'use strict';
 
+/*
+ * es: Dependencias | en: Module dependencies
+ */
 var path = require('path'),
     fs = require('fs');
 

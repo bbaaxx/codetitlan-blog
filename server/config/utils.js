@@ -1,8 +1,16 @@
-'use strict';
+/*
+ * server/config/utils.js
+ */
+ 'use strict';
 
+/*
+ * es: Dependencias | en: Module dependencies
+ */
 var path = require('path'),
     fs = require('fs');
 
+// es: Funcion para 'requerir' paquetes recursivamente
+// en: Function to 'require' packages recursively
 exports.walk = function(wpath, type, excludeDir, callback) {
   var self = this;
   var rgx = new RegExp('(.*)-' + type + '(s?).(js|coffee)$', 'i');

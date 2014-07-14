@@ -1,4 +1,7 @@
-'use strict';
+/*
+ * server/config/env/test.js
+ */
+ 'use strict';
 
 module.exports = {
   env: 'test',

@@ -1,6 +1,10 @@
-'use strict';
+/*
+ * server/config/env/development.js
+ */
+ 'use strict';
 
 module.exports = {
+
   env: 'development',
   app: {
       name: 'Codetitilan Application Server & Backend - (Development)'
@@ -12,4 +16,5 @@ module.exports = {
   mongo: {
   	uri: 'mongodb://localhost/codetitlan-blog-dev'
   }
+  
 };

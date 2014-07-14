@@ -1,14 +1,17 @@
 /*
  * server/config/bootstrap.js
  */
-
  'use strict';
 
-var express = require('express'),
-    config  = require('./config'),
-    utils   = require('./utils');
+/*
+ * es: Dependencias | en: Module dependencies
+ */
+var express  = require('express'),
+    passport = require('passport'),
+    config   = require('./config'),
+    utils    = require('./utils');
   
-module.exports = function(passport) {
+module.exports = function() {
 
   // es: Inicializa los modelos de la db
   // es: Bootstrap db models
@@ -17,7 +20,7 @@ module.exports = function(passport) {
         require(path);
     });
   }
-  // TODO - Looks a bit ugly to call the function like this
+  // TODO - Looks ugly to call the function like this
   bootstrapModels();
 
   // es: Inicializa la configuración de passport

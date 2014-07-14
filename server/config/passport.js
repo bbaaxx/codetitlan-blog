@@ -1,9 +1,11 @@
 /*
  * server/config/passport.js
  */
+ 'use strict';
 
-'use strict';
-
+/*
+ * es: Dependencias | en: Module dependencies
+ */
 var mongoose         = require('mongoose'),
     LocalStrategy    = require('passport-local').Strategy,
     /*

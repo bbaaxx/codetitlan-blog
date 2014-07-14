@@ -75,7 +75,7 @@ module.exports = function(grunt) {
     ];
     tasks = target==='debug'  ? tasks.concat(['concurrent:debug']) :
             target==='client' ? tasks.concat(['express:dev','watch']) :
-            tasks.concat([ 'nodemon:dev', 'watch' ]);
+            tasks.concat([ 'concurrent:dev' ]);
     return grunt.task.run(tasks);
   });
   grunt.registerTask('build', 'Building task', [

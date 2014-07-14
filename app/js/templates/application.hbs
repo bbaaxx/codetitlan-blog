@@ -10,6 +10,7 @@
         <a class="navbar-brand" href="#">{{appName}}</a>
       </div>
       <div class="navbar-collapse collapse">
+
         <ul class="nav navbar-nav">
 
           {{#each item in mainMenu}}
@@ -19,7 +20,7 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
+              <li><a href="#">One action</a></li>
               <li><a href="#">Another action</a></li>
               <li><a href="#">Something else here</a></li>
               <li class="divider"></li>
@@ -29,6 +30,15 @@
             </ul>
           </li>
         </ul>
+        <form class="navbar-form navbar-right" role="form">
+          <div class="form-group">
+            <input type="text" placeholder="Email" class="form-control">
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Password" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-success">Sign in</button>
+        </form>
       </div>
     </section>
   </div>

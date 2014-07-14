@@ -1,5 +1,11 @@
-'use strict';
+/*
+ * server/config/config.js
+ */
+ 'use strict';
 
+/*
+ * es: Dependencias | en: Module dependencies
+ */
 // es: Usamos la librería lodash por que es divertido
 // en: Let's use lodash just for fun
 var _ = require('lodash');
