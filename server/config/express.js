@@ -33,9 +33,9 @@ module.exports = function(app,passport) {
   // en: Setting views dir, caching and logging and options depending on env
   if ('development' === env) {
     app.set('showStackError', true);
+    app.use(morgan('dev'));
     app.set('views', config.root + '/server/views');
     app.use(express.static(path.join(config.root, 'app')));
-    app.use(morgan('dev'));
     app.use(require('connect-livereload')());
   }
   if ('production' === env) {

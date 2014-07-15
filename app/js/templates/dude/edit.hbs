@@ -1,0 +1,22 @@
+<div class="dude-edit">
+  <div class="form-group">
+  	<label>Choose dude avatar</label>
+  	{{input value=avatarUrl class="form-control"}}
+  </div>
+
+  <div class="form-group">
+	  <label>Dude name</label>
+	  {{input value=name class="form-control"}}
+  </div>
+
+  <div class="form-group">
+	  <label>Dude email</label>
+	  {{input value=email class="form-control"}}
+  </div>
+
+  <div class="form-group">
+	  <label>Dude short bio</label>
+	  {{textarea value=bio class="form-control"}}
+  </div>
+  <button {{action "save"}}> ok </button>
+</div>

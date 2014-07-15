@@ -7,7 +7,10 @@
 
   App.ApplicationController = Ember.Controller.extend({
     appName: 'Codetitlan',
-    mainMenu: ['index','emberlearn']
+    mainMenu: ['embl','dudes'],
+    opt:{
+    	container: true
+    }
   });
 
 })();

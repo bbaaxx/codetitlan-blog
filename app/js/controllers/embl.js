@@ -5,14 +5,16 @@
 (function(){
   'use strict';
 
-  App.EmberlearnController = Ember.Controller.extend({
+  App.EmblController = Ember.Controller.extend({
 
     // For fullName computed property
     firstName: "Bender",
     lastName: "Rito",
     fullName: function(){
-      return this.get('firstName') + ' ' + this.get('lastName');
+      return this.get('firstName') + 
+             ' ' + this.get('lastName');
     }.property('firstName', 'lastName'),
+    
     // Observer that runs on init
     fullNameChanged: function() {
       console.log('observer for fullName triggered');

@@ -1,11 +1,11 @@
 /*
- * models/user.js
+ * models/dude.js
  */
 
 (function(){
   'use strict';
 
-  App.User = DS.Model.extend({
+  App.Dude = DS.Model.extend({
     name         : DS.attr(),
     email        : DS.attr(),
     bio          : DS.attr(),
@@ -13,7 +13,7 @@
     creationDate : DS.attr()
   });
 
-  App.User.FIXTURES = [
+  /*App.Dude.FIXTURES = [
     {
       id: 1,
       name: 'Sponge Bob',
@@ -29,6 +29,6 @@
       avatarUrl: 'http://jkneb.github.io/ember-crud/assets/images/avatars/jk.jpg',
       creationDate: 'Fri, 07 Aug 2013 10:10:10 GMT'
     }
-  ];
+  ];*/
 
 })();

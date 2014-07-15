@@ -1,5 +1,7 @@
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+
     <section id="navbar" class="container">
+
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="sr-only">Toggle navigation</span>
@@ -7,8 +9,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">{{appName}}</a>
+        {{#link-to 'application' class="navbar-brand"}}
+          {{appName}}
+        {{/link-to}}
+
+        {{!-- <a class="navbar-brand" href="#">{{appName}}</a> --}}
       </div>
+
       <div class="navbar-collapse collapse">
 
         <ul class="nav navbar-nav">
@@ -17,7 +24,7 @@
           <li>{{#link-to item}}go to:{{item}}{{/link-to}}</li>
           {{/each}}
 
-          <li class="dropdown">
+          {{!-- <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="#">One action</a></li>
@@ -28,20 +35,26 @@
               <li><a href="#">Separated link</a></li>
               <li><a href="#">One more separated link</a></li>
             </ul>
-          </li>
+          </li> --}}
+
         </ul>
+
         <form class="navbar-form navbar-right" role="form">
           <div class="form-group">
-            <input type="text" placeholder="Email" class="form-control">
+            {{input value=email class="form-control" placeholder="Email"}}
           </div>
           <div class="form-group">
-            <input type="password" placeholder="Password" class="form-control">
+            {{input value=password class="form-control" placeholder="Password" type="password"}}
           </div>
-          <button type="submit" class="btn btn-success">Sign in</button>
+          <button type="submit" class="btn">Sign in</button>
         </form>
+
       </div>
+
     </section>
+
   </div>
 
-
-  {{outlet}}
+  <div data-thingie="here is some thingie" {{bind-attr class='opt.container'}}>
+    {{outlet}}
+  </div>
