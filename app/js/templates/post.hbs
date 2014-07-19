@@ -1,12 +1,13 @@
 {{!-- 
-  /dude
+  /post
 --}}
 
-<div class="dude-profile">
-	<img {{bind-attr src="avatarUrl"}} alt="Dude's avatar" />
-	<h2>{{name}}</h2>
-	<span>{{email}}</span>
-	<p>{{bio}}</p>
+<div class="post-detail">
+	<h2>{{title}}</h2>
+	<p>{{type}}</p>
+	<hr>
+	<div class="post-content"><p>{{postContent}}</p></div>
+	<p><span>Tags: </span>{{tags}}</p>
 	<span>Created {{creationDate}}</span>
 	<button {{action "edit"}}>Edit</button>
 	<button {{action "delete"}}>Delete</button>

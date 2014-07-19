@@ -20,7 +20,7 @@ module.exports = function(grunt,options) {
       src: [ '<%= sets.hbsCompTemplates %>' ]
     },
     cleanup: {
-      src: ['<%= paths.root %>/.tmp']
+      src: ['<%= paths.root %>/.tmp', '<%= paths.root %>/.reboot']
     }
     
   }

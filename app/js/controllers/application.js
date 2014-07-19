@@ -6,11 +6,13 @@
   'use strict';
 
   App.ApplicationController = Ember.Controller.extend({
-    appName: 'Codetitlan',
-    mainMenu: ['embl','dudes'],
+    // TODO - Get these settings dynamically
+    appName: 'Codetitilan',
+    mainMenu: ['dudes','posts'],
     opt:{
-    	container: true
+      container: true
     }
+
   });
 
 })();

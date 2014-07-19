@@ -1,5 +1,5 @@
 /*
- * /routes/indexRoute.js
+ * /routes/index.js
  */
 
 (function(){

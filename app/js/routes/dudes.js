@@ -1,20 +1,9 @@
 /*
- * /routes/dudesRoute.js
+ * /routes/dudes.js
  */
 
 (function(){
   'use strict';
-
-  App.Router.map(function(){
-
-    this.resource('dudes', function() {
-      this.resource('dude', {path:'/:dude_id'}, function() {
-        this.route('edit');
-      });
-      this.route('create');
-    });
-
-  });
 
   App.DudesRoute = Ember.Route.extend({
     model: function(){

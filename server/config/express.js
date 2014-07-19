@@ -61,7 +61,7 @@ module.exports = function(app,passport) {
   app.engine('html', consolidate[config.templateEngines]);
   app.set('view engine', 'html');
 
-  // enable JSONp and use all parsing validating and overriding middlewares
+  // enable JSONp and use all parsing validation and override middlewares
   app.enable('jsonp callback');
   app.use(cookieParser());
   app.use(bodyParser.json());

@@ -12,7 +12,7 @@ module.exports = function(grunt,options) {
         cwd: '<%= paths.root %>',
         ignore: '<%= sets.nodemonIgnore %>',
         ext: 'js,html',
-        // delayTime: 1,
+        delayTime: 1,
         env: {
           PORT:'9000',
           NODE_ENV: 'development'

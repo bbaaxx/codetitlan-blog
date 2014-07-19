@@ -16,11 +16,12 @@ exports.authCallback = function(req, res) {
 /**
  * Show login form
  */
+// TODO - Not really sure this is required here for ember
 exports.signin = function(req, res) {
     if(req.isAuthenticated()) {
         return res.redirect('/');
     }
-    res.redirect('#!/login');
+    res.redirect('#/users/signin');
 };
 
 /**

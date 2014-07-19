@@ -28,7 +28,7 @@ module.exports = function(grunt,options) {
       options: { livereload: true }
     },
     gruntfile: {
-      files: ['Gruntfile.js', '.grunt/'],
+      files: ['Gruntfile.js', '.grunt/*.js'],
       options: { reload: true }
     }
 

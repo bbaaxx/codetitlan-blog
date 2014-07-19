@@ -7,7 +7,7 @@ module.exports = function(grunt,options) {
 
 
   return {
-    refreshTemplates: ['clean:templates','emberTemplates'],
+    refreshTemplates: ['emberTemplates'],
     jshintBuild: ['jshint:server','jshint:client']
   }
 
