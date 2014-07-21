@@ -16,7 +16,10 @@ module.exports = function(grunt,options) {
       tasks: [
         'nodemon:dev',
         'watch'
-      ]
+      ],
+      options: {
+        logConcurrentOutput: true
+      }
     },
     debug: {
       tasks: [

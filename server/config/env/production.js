@@ -1,4 +1,7 @@
-'use strict';
+/*
+ * server/config/env/production.js
+ */
+ 'use strict';
 
 module.exports = {
   env: 'production',
