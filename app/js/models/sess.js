@@ -1,5 +1,5 @@
 /*
- * models/user.js
+ * models/sess.js
  */
 (function(){
   'use strict';
@@ -16,17 +16,6 @@
     roles: attr()
 
   });
-
-  App.Signup = DS.Model.extend({
-
-    name: attr(),
-    username: attr(),
-    email: attr(),
-    password: attr(),
-    confirmPassword: attr()
-
-  });
-
 
   // Fixtures
   App.User.FIXTURES = [

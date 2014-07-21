@@ -4,8 +4,9 @@
 
 (function(){
   'use strict';
+  needs: ['application'],
 
-  App.UsersController = Ember.ArrayController.extend({
+  App.SessController = Ember.ArrayController.extend({
     usersCount: function(){
       return this.get('model.length');
     }.property('@each'),
@@ -13,7 +14,7 @@
     sortAscending: true // false = descending
   });
 
-  App.UsersSignupController = Ember.ObjectController.extend({
+  App.SessSignupController = Ember.ObjectController.extend({
     actions: {
       save: function() {
         // this.get('model').save();
@@ -22,7 +23,7 @@
     }
   });
 
-  App.UsersSigninController = Ember.ObjectController.extend({
+  App.SessSigninController = Ember.ObjectController.extend({
     content: {},
     actions: {
       signin: function() {
@@ -30,6 +31,8 @@
         Ember.$.post('/signin', this.getProperties('email','password'))
           .then(function(response) {
             window.user = response.user;
+            self.get('controllers.application').set('user', response.user);
+            self.get('controllers.application').set('user.auth', true);
             self.transitionToRoute('index');
 
           });
@@ -38,8 +41,9 @@
   });
 
 
+
   /*
-  App.UsersCreateController = Ember.ObjectController.extend({
+  App.SessCreateController = Ember.ObjectController.extend({
     actions: {
       save: function(){
         // just before saving, we set the creationDate

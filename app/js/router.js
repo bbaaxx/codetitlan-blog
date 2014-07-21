@@ -10,9 +10,10 @@
 
     this.route('index', { path: '/' });
 
-    this.resource('users', function() {
+    this.resource('sess', function() {
       this.route('signup');
       this.route('signin');
+      this.route('signout');
     });
 
     this.resource('posts', function() {

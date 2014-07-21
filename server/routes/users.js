@@ -9,7 +9,7 @@ var users = require('../controllers/users');
 
 module.exports = function(app, passport) {
 
-  app.route('/logout')
+  app.route('/signout')
     .get(users.signout);
   app.route('/users/me')
     .get(users.me);

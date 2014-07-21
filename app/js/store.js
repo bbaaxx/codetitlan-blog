@@ -16,7 +16,7 @@
   // App.ApplicationAdapter = DS.RESTAdapter;
 
   // This is a temporal configuarion during stabilization of auth
-  App.ApplicationAdapter = DS.FixtureAdapter;
+  App.ApplicationAdapter = DS.LSAdapter;
   App.UserAdapter = DS.RESTAdapter;
 
 
