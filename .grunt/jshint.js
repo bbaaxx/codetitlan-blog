@@ -12,11 +12,12 @@ module.exports = function(grunt,options) {
     },
     server: {
       options: {
-        force: true
+        force: true,
         //jshintrc: 'server/.jshintrc'
+        ignores: ['app/js/templates.js']
       },
-      src: [ 
-        'server/{,*/}*.js', 
+      src: [
+        'server/{,*/}*.js',
         'server.js'
       ]
     },

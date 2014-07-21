@@ -4,9 +4,10 @@
 
 (function(){
   'use strict';
-  needs: ['application'],
 
   App.SessController = Ember.ArrayController.extend({
+
+
     usersCount: function(){
       return this.get('model.length');
     }.property('@each'),
@@ -25,6 +26,7 @@
 
   App.SessSigninController = Ember.ObjectController.extend({
     content: {},
+    needs: ['application'],
     actions: {
       signin: function() {
         var self = this;

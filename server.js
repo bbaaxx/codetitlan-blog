@@ -38,9 +38,9 @@ if (process.env.NODE_ENV === 'production') {
 conn.once('open', function() {
   app.listen(config.port, config.ipaddr, function () {
     console.log(
-    'Express server listening on http://%s:%d, in %s mode', 
-    config.host, 
-    config.port, 
+    'Express server listening on http://%s:%d, in %s mode',
+    config.host,
+    config.port,
     app.get('env')
     );
   });

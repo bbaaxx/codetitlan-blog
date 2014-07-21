@@ -6,11 +6,10 @@
 /*
  * es: Dependencias | en: Module dependencies
  */
-var path = require('path'),
-    fs = require('fs');
+ // null
 
 module.exports = {
-  root: path.normalize(__dirname + '/../../..'),
+  root: require('path').normalize(__dirname + '/../../..'),
   templateEngines: ['hogan'],
   mongo: {
     options: {

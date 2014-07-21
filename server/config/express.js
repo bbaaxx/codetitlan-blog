@@ -56,7 +56,7 @@ module.exports = function(app,passport) {
     });
     app.use(express.static(path.join(config.root, 'app')));
   }
-  
+
   // Set up templating engine
   app.engine('html', consolidate[config.templateEngines]);
   app.set('view engine', 'html');
@@ -74,12 +74,15 @@ module.exports = function(app,passport) {
     store: new mongoStore({
       url: config.mongo.uri,
       collection: 'sessions'
+    }, function(){
+      console.log('Sessions storage good to go');
     }),
     secret: 'There is no coincidence, only hitzusen - Yukko',
     cookie: config.sessionCookie,
     name: config.sessionName,
     resave: true,
     saveUninitialized: true,
+    'auto_reconnect': true
   }));
   app.use(helpers(config.app.name));
 

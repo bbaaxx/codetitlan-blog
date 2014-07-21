@@ -19,9 +19,9 @@ module.exports = {
 	terminatorHandlers: function() {
 		//  Process on exit and signals.
     var signals = ['SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 'SIGABRT',
-                  'SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 'SIGUSR2', 'SIGTERM']
+                  'SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 'SIGUSR2', 'SIGTERM'];
     var terminator = function(sig){
-      if (typeof sig === "string") {
+      if (typeof sig === 'string') {
          console.log('%s: Received %s - terminating ...',
                      Date(Date.now()), sig);
          process.exit(1);
@@ -30,7 +30,7 @@ module.exports = {
     };
 
     process.on('exit', function() { terminator(); });
-    signals.forEach(function(sig, index, array) {
+    signals.forEach(function(sig) {
         process.on(sig, function() { terminator(sig); });
     });
   }

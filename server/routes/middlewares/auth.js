@@ -54,4 +54,4 @@ exports.setUserCookie = function(req, res, next) {
     res.cookie('user', JSON.stringify(req.user.userInfo));
   }
   next();
-}
+};
