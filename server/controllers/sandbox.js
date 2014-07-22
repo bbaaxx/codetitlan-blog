@@ -58,4 +58,3 @@ exports.index = function(req, res) {
     sess: JSON.stringify(sess)
   });
 };
-

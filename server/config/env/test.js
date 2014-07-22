@@ -8,7 +8,7 @@ module.exports = {
   app: {
       name: 'Codetitilan Application Server & Backend - (Development)'
   },
-  port: process.env.PORT || 9000,
+  port: 9696,
   hostname: process.env.HOSTNAME || 'localhost',
   ipaddr: process.env.IP || '0.0.0.0',
   host: process.env.HOST || 'localhost',

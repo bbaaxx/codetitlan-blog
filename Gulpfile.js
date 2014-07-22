@@ -10,6 +10,7 @@ var gulp           = require('gulp'),
 
 // Load gulp plugins
 var clean            = require('gulp-clean'),
+    gutil            = require('gulp-util'),
     wait             = require('gulp-wait'),
     sass             = require('gulp-sass'),
     autoprefixer     = require('gulp-autoprefixer'),
@@ -22,6 +23,8 @@ var clean            = require('gulp-clean'),
     remember         = require('gulp-remember'),
     lrSrv            = require('tiny-lr')(),
     livereload       = require('gulp-livereload'),
+    mocha            = require('gulp-spawn-mocha'),
+    plumber          = require('gulp-plumber'),
     notify           = require('gulp-notify');
 /*
 uglify = require('gulp-uglify'),
@@ -33,9 +36,12 @@ var globs = {
   serverJs: ['server/**/*.js', 'server.js'],
   emberTemplates: ['app/js/templates/**/*.hbs'],
   scssEntry: ['app/styles/scss/main.scss'],
-  generatedStyles: ['app/styles/css/*.css']
+  scssStyles: ['app/styles/scss/**/*.scss'],
+  generatedStyles: ['app/styles/css/*.css'],
+  serverTests: ['tests/mocha/**/*.js']
 };
-var nodeInstance;
+var devNodeInstance;
+var testNodeInstance;
 
 // Cleanup directories and files
 gulp.task('devCleanup', function() {
@@ -55,6 +61,7 @@ gulp.task('templates', function() {
   .pipe(remember('templates'))
   .pipe(concat('templates.js'))
   .pipe(gulp.dest('app/js'))
+  .pipe(livereload(lrSrv))
   .pipe(notify({ message: 'Templates task complete' }));
 });
 
@@ -83,20 +90,34 @@ gulp.task('styles', function() {
   .pipe(sass({ outputStyle: 'nested', sourceComments: 'normal' }))
   .pipe(autoprefixer('last 1 version'))
   .pipe(gulp.dest('app/styles/css'))
+  .pipe(livereload(lrSrv))
   .pipe(rename({ suffix: '.min' }))
   .pipe(minifycss())
-  .pipe(livereload(lrSrv))
   .pipe(gulp.dest('public/styles'))
   .pipe(notify({ message: 'Styles task complete' }));
 });
 
+// Server tests
+gulp.task('mocha', function(){
+  return gulp.src(globs.serverTests)
+  .pipe(plumber())
+  .pipe(jshint())
+  .pipe(mocha({
+    env: {'NODE_ENV': 'test'},
+    reporter:'nyan',
+    require: ['server.js']
+  }))
+  .pipe(notify({message: 'Mocha tests complete !'}));
+})
+
+
 // Express Server
-gulp.task('server', function() {
-  if (nodeInstance) { nodeInstance.kill(); }
-  nodeInstance = spawn('node', ['server.js'], { stdio: 'inherit' });
-  nodeInstance.on('close', function (code) {
+gulp.task('devServer', function() {
+  if (devNodeInstance) { devNodeInstance.kill(); }
+  devNodeInstance = spawn('node', ['server.js'], { stdio: 'inherit' });
+  devNodeInstance.on('close', function (code) {
     if (code === 8) {
-      console.log('Error detected, waiting for changes...');
+      gutil.log('Error detected, waiting for changes...');
     }
   });
 });
@@ -104,18 +125,19 @@ gulp.task('server', function() {
 // Watch task
 gulp.task('watch',function(){
   // Trigger actions when server files change
-  gulp.watch(globs.serverJs, ['jshintServerJs','server']);
+  gulp.watch(globs.serverJs, ['jshintServerJs','devServer']);
   // Trigger actions when client files change
   gulp.watch(globs.clientJs, ['jshintClientJs']);
   gulp.watch(globs.emberTemplates, ['templates'])
-    .on('change', function(){
+    .on('change', function(event){
       if (event.type === 'deleted') { // if a file is deleted, forget about it
         delete cache.caches['templates'][event.path];
         remember.forget('templates', event.path);
       }
     }
   );
-  gulp.watch(globs.generatedStyles, ['styles']);
+  gulp.watch(globs.scssStyles, ['styles']);
+  gulp.watch(globs.serverTests, ['mocha']);
 });
 
 
@@ -125,7 +147,7 @@ gulp.task('dev', [
   'devCleanup',
   'styles',
   'templates',
-  'server',
+  'devServer',
   'watch'
   ]
 );

@@ -75,7 +75,7 @@ module.exports = function(app,passport) {
       url: config.mongo.uri,
       collection: 'sessions'
     }, function(){
-      console.log('Sessions storage good to go');
+      console.log('Sessions store online');
     }),
     secret: 'There is no coincidence, only hitzusen - Yukko',
     cookie: config.sessionCookie,
