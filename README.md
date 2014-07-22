@@ -1,5 +1,6 @@
 Codetitlan - The future blogging platform of the past.
 ======================================================
+[![Build Status](https://travis-ci.org/bbaaxx/codetitlan-blog.svg?branch=master)](https://travis-ci.org/bbaaxx/codetitlan-blog) | [![wercker status](https://app.wercker.com/status/5e18081faf5b6d4ec208dc5a47591c23/s "wercker status")](https://app.wercker.com/project/bykey/5e18081faf5b6d4ec208dc5a47591c23)
 
 An evolving full-stack javascript application platform (mainly for blogging) built with very good intentions and the usual stuff:
 
