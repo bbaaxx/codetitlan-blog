@@ -16,8 +16,9 @@
   },
   "main": "server.js",
   "scripts": {
-    "start": "node node_modules/grunt-cli/bin/grunt",
-    "test": "node node_modules/grunt-cli/bin/grunt test"
+    "start": "node node_modules/grunt-cli/.bin/gulp",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha tests/mocha/**/*.js --require server.js --reporter nyan",
+    "coverage": "NODE_ENV=test istanbul cover --dir tests/coverage node_modules/.bin/_mocha -- -r server.js tests/**/*.js"
   },
   "keywords": [
     "blog"

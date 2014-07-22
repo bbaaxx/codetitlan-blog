@@ -6,7 +6,7 @@
 module.exports = {
   env: 'test',
   app: {
-      name: 'Codetitilan Application Server & Backend - (Development)'
+      name: 'Codetitilan Application Server & Backend - (Testing)'
   },
   port: 9696,
   hostname: process.env.HOSTNAME || 'localhost',
