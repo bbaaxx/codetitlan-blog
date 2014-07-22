@@ -1,6 +1,6 @@
 Codetitlan - The future blogging platform of the past.
 ======================================================
-[![Build Status](https://travis-ci.org/bbaaxx/codetitlan-blog.svg?branch=master)](https://travis-ci.org/bbaaxx/codetitlan-blog) | [![wercker status](https://app.wercker.com/status/5e18081faf5b6d4ec208dc5a47591c23/s "wercker status")](https://app.wercker.com/project/bykey/5e18081faf5b6d4ec208dc5a47591c23)
+[![Build Status](https://travis-ci.org/bbaaxx/codetitlan-blog.svg?branch=master)](https://travis-ci.org/bbaaxx/codetitlan-blog) | [![Dependency Status](https://gemnasium.com/bbaaxx/codetitlan-blog.svg)](https://gemnasium.com/bbaaxx/codetitlan-blog) | [![wercker status](https://app.wercker.com/status/5e18081faf5b6d4ec208dc5a47591c23/s "wercker status")](https://app.wercker.com/project/bykey/5e18081faf5b6d4ec208dc5a47591c23)
 
 An evolving full-stack javascript application platform (mainly for blogging) built with very good intentions and the usual stuff:
 
@@ -23,6 +23,7 @@ The platform will have a blogging application logic programmed out of the box bu
   * End-to-end authentication with oAuth providers
   * Posts functionality
   * Administrative interface blueprint
+  
 #### In the near future (beta_1)...
   * ES6 Syntax support on the build system
   * Code richely documented in both english, spanish and probably french too
