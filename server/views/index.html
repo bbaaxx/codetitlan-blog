@@ -19,6 +19,7 @@
     <!-- build:css(app) styles/styles.css -->
     <link rel="stylesheet" href="styles/css/main.css">
     <!-- endbuild -->
+
     <script src="lib/modernizr/modernizr.js"></script>
 </head>
 
@@ -26,29 +27,59 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
+    <script type="text/javascript">
+        window.user ={{{user}}};
+    </script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="lib/jquery/dist/jquery.js"><\/script>')</script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
     <!-- build:js(app) js/libs.js -->
     <script src="lib/handlebars/handlebars.js"></script>
     <script src="lib/ember/ember.js"></script>
     <script src="lib/ember-data/ember-data.js"></script>
     <script src="lib/ember-localstorage-adapter/localstorage_adapter.js"></script>
     <!-- endbuild -->
+
     <!-- build:js(app) js/app.js -->
+
+        <!-- init app  -->
     <script src="js/app-init.js"></script>
-    <script src="js/templates.js"></script>
+    <script src="js/store.js"></script>
     <script src="js/router.js"></script>
+        <!-- base set -->
+    <script src="js/routes/application.js"></script>
+    <script src="js/routes/index.js"></script>
     <script src="js/controllers/application.js"></script>
     <script src="js/controllers/index.js"></script>
-    <script src="js/controllers/emberlearn.js"></script>
-    <!--
-    <script src="js/store.js"></script>
-    <script src="js/models/user.js"></script>
-    -->
+
+
+        <!-- models  -->
+    <script src="js/models/sess.js"></script>
+    <script src="js/models/post.js"></script>
+
+    <script src="js/models/dude.js"></script>
+
+        <!-- routes  -->
+    <script src="js/routes/sess.js"></script>
+    <script src="js/routes/posts.js"></script>
+
+    <script src="js/routes/dudes.js"></script>
+
+        <!-- controllers  -->
+    <script src="js/controllers/sess.js"></script>
+    <script src="js/controllers/posts.js"></script>
+
+    <script src="js/controllers/dudes.js"></script>
+
+        <!-- helpers  -->
+    <script src="js/helpers/strings.js"></script>
+
+        <!-- templates  -->
+    <script src="js/templates.js"></script>
+
     <!-- endbuild -->
-    
+
 
 </body>
 

@@ -1,0 +1,23 @@
+{{!-- 
+  /dudes
+--}}
+
+<div class="main">
+  <div class="row">
+    <div class="col-md-3">
+      
+      <ul class="dudes-listing">
+        {{#each dude in controller}}
+        <li>{{#link-to "dude" dude}}{{dude.name}}{{/link-to}}</li>
+        {{else}}
+        <li>no dudes… :-(</li>
+        {{/each}}
+      </ul>
+      <p>Total Dudes: {{dudesCount}}</p>
+      {{#link-to "dudes.create" class="create-btn"}} New dude ... {{/link-to}}
+    </div>
+    <div class="col-md-9">
+      {{outlet}}
+    </div>
+  </div>
+</div>

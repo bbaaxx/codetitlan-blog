@@ -1,0 +1,43 @@
+{{!-- 
+  /users/signup
+--}}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+      <section id="signup-form">
+
+        <div class="form-group">
+          <label>Your Name</label>
+          {{input value=name class="form-control"}}
+        </div>
+
+        <div class="form-group">
+          <label>Your Username</label>
+          {{input value=username class="form-control"}}
+        </div>
+
+        <div class="form-group">
+          <label>Your Email</label>
+          {{input value=email class="form-control"}}
+        </div>
+
+        <div class="form-group">
+          <label>Your passord</label>
+          {{input value=password class="form-control"}}
+        </div>
+
+        <div class="form-group">
+          <label>Please confirm your password</label>
+          {{input value=confirmPassword class="form-control"}}
+        </div>
+
+        <button {{action "save"}} class="btn btn-success"> Sign up ! </button>
+
+      </section>
+
+
+    </div>
+  </div>
+</div>

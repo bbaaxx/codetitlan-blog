@@ -1,0 +1,23 @@
+{{!-- 
+  /posts
+--}}
+
+<div class="main">
+  <div class="row">
+    <div class="col-md-3">
+      
+      <ul class="posts-listing">
+        {{#each post in controller}}
+        <li>{{#link-to "post" post}}{{post.title}}{{/link-to}}</li>
+        {{else}}
+        <li>no posts … :-(</li>
+        {{/each}}
+      </ul>
+      <p>Total Posts: {{postsCount}}</p>
+      {{#link-to "posts.create" class="create-btn"}} New post ... {{/link-to}}
+    </div>
+    <div class="col-md-9">
+      {{outlet}}
+    </div>
+  </div>
+</div>

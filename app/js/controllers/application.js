@@ -5,9 +5,13 @@
 (function(){
   'use strict';
 
-  App.ApplicationController = Ember.Controller.extend({
-    appName: 'Codetitlan',
-    mainMenu: ['index','emberlearn']
+  App.ApplicationController = Ember.ObjectController.extend({
+    appName: null,
+    console: {
+      userObj: null,
+      mdrnObj: null
+    },
+    menus: null
   });
 
 })();

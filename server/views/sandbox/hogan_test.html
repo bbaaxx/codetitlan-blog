@@ -3,6 +3,8 @@
         <h1>Understanding mustache templates</h1>
     </header>
     <div>
+        <p>User: {{user.username}}</p>
+        
         <h3>Simple Variable</h3>
         <p>{{mst.eVariable}}</p>
         <p>{{{mst.uVariable}}}</p>
@@ -65,5 +67,6 @@
         </p>
         <p>It does look <%& mst.forUnscapedNewDelims %>, doesn't it?</p>
         <%={{ }}=%>
+
     </div>
 </section>

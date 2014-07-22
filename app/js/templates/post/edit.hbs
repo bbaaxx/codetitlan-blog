@@ -1,0 +1,25 @@
+<div class="post-edit">
+
+  <div class="form-group">
+    <label>Post Title</label>
+    {{input value=title class="form-control"}}
+  </div>
+
+  <div class="form-group">
+    <label>Post Type</label>
+    {{input value=type class="form-control"}}
+  </div>
+
+  <div class="form-group">
+    <label>Post Content</label>
+    {{textarea value=postContent class="form-control"}}
+  </div>
+
+  <div class="form-group">
+    <label>Tags</label>
+    {{input value=tags class="form-control"}}
+  </div>
+  
+  <button {{action "save"}}> ok </button>
+
+</div>

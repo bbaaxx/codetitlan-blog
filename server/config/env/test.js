@@ -1,13 +1,18 @@
-'use strict';
+/*
+ * server/config/env/test.js
+ */
+ 'use strict';
 
 module.exports = {
+  env: 'test',
   app: {
-      name: 'Codetitilan Application Server & Backend - (Development)'
+      name: 'Codetitilan Application Server & Backend - (Testing)'
   },
-  port: process.env.PORT || 9000,
+  port: 9696,
   hostname: process.env.HOSTNAME || 'localhost',
-  ipaddr: process.env.IP || '127.0.0.1',
+  ipaddr: process.env.IP || '0.0.0.0',
   host: process.env.HOST || 'localhost',
-  dbType: 'none yet'
-  db: 'Nothing here yet',
+  mongo: {
+  	uri: 'mongodb://localhost/codetitlan-blog-test'
+  }
 };
