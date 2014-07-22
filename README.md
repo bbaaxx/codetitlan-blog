@@ -23,6 +23,7 @@ The platform will have a blogging application logic programmed out of the box bu
   * End-to-end authentication with oAuth providers
   * Posts functionality
   * Administrative interface blueprint
+  
 #### In the near future (beta_1)...
   * ES6 Syntax support on the build system
   * Code richely documented in both english, spanish and probably french too
