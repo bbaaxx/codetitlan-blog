@@ -8,7 +8,7 @@ var dbHost = process.env.WERCKER_MONGODB_HOST || 'localhost';
 module.exports = {
   env: 'test',
   app: {
-      name: 'Codetitilan Application Server & Backend - (Testing)'
+      name: 'Codetitilan Application Server - (Testing)'
   },
   port: 9696,
   hostname: process.env.HOSTNAME || 'localhost',
