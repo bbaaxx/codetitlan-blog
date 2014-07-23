@@ -18,6 +18,11 @@ var lotsOfShits = {
       return '<b>'+stuff+'</b>';
     };
   },
+  jsonToString: function() {
+    return function(stuff) {
+      return JSON.stringify(stuff);
+    };
+  },
   // Stuff for Non-falsy values
   duDu: { content: 'doo!' },
   // Stuff for inverted sections

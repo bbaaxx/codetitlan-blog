@@ -3,16 +3,18 @@
  */
  'use strict';
 
+var dbHost = process.env.WERCKER_MONGODB_HOST || 'localhost';
+
 module.exports = {
   env: 'test',
   app: {
-      name: 'Codetitilan Application Server & Backend - (Testing)'
+      name: 'Codetitilan Application Server - (Testing)'
   },
   port: 9696,
   hostname: process.env.HOSTNAME || 'localhost',
   ipaddr: process.env.IP || '0.0.0.0',
   host: process.env.HOST || 'localhost',
   mongo: {
-  	uri: 'mongodb://localhost/codetitlan-blog-test'
+  	uri: 'mongodb://'+dbHost+'/codetitlan-blog-test'
   }
 };

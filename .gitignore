@@ -6,9 +6,7 @@ node_modules/
 test/coverage
 npm-debug.log
 *.sublime-*
-.reboot
 app/lib
 app/styles/css
 app/js/templates.js
 .cookie
-public/

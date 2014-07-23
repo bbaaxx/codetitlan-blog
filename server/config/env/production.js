@@ -3,17 +3,37 @@
  */
  'use strict';
 
+var detectPlatform = function(){
+  if(process.env.OPENSHIFT_MONGODB_DB_URL) { return 'openshift'; }
+  else if(process.env.VCAP_APPLICATION) { return 'bluemix'; }
+  // TODO - Heroku
+  else { return 'local'; }
+};
+
+
+var makeDbString = function(platform){
+  if(platform === 'openshift') {
+    return process.env.OPENSHIFT_MONGODB_DB_URL + process.env.OPENSHIFT_APP_NAME;
+  } else if (platform === 'bluemix') {
+    return process.env.VCAP_SERVICES.mongolab.uri || null;
+  } else {
+    // TODO - Heroku
+    return 'mongodb://localhost/codetitlan-blog';
+  }
+};
+
 module.exports = {
+
   env: 'production',
   app: {
-      name: 'Codetitilan Application Server & Backend'
+      name: 'Codetitilan Application Server'
   },
   port: process.env.OPENSHIFT_INTERNAL_PORT || process.env.OPENSHIFT_NODEJS_PORT || process.env.VCAP_APP_PORT || 8080,
   hostname: process.env.HOSTNAME || 'localhost',
   ipaddr: process.env.OPENSHIFT_INTERNAL_IP || process.env.OPENSHIFT_NODEJS_IP || process.env.VCAP_APP_HOST || '127.0.0.1',
   host: process.env.HOST || process.env.VCAP_APP_HOST || 'localhost',
 	mongo: {
-    uri: 'mongodb://FILL PRODUCTION DB DATA'
+    uri: makeDbString(detectPlatform())
   },
 
 	terminatorHandlers: function() {
