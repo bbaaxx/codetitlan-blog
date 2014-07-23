@@ -3,6 +3,8 @@
  */
  'use strict';
 
+var dbHost = process.env.WERCKER_MONGODB_HOST || 'localhost'
+
 module.exports = {
   env: 'test',
   app: {
@@ -13,6 +15,6 @@ module.exports = {
   ipaddr: process.env.IP || '0.0.0.0',
   host: process.env.HOST || 'localhost',
   mongo: {
-  	uri: 'mongodb://localhost/codetitlan-blog-test'
+  	uri: 'mongodb://'+dbHost+'/codetitlan-blog-test'
   }
 };
