@@ -4,6 +4,7 @@
 # before the build step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
 
+set HOME=/var/lib/openshift/53cf085b4382ecacbc000398/app-root/runtime/repo/
 
 #  Source utility functions.
 source "$OPENSHIFT_REPO_DIR/.openshift/lib/utils"

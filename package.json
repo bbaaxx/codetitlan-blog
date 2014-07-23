@@ -16,6 +16,7 @@
   },
   "main": "server.js",
   "scripts": {
+    "postinstall": "node node_modules/bower/bin/bower install",
     "start": "node node_modules/gulp/bin/gulp",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha tests/mocha/**/*.js --require server.js --reporter nyan",
     "coverage": "NODE_ENV=test istanbul cover --dir tests/coverage node_modules/.bin/_mocha -- -r server.js tests/**/*.js"
