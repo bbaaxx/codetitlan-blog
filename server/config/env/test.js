@@ -3,7 +3,7 @@
  */
  'use strict';
 
-var dbHost = process.env.WERCKER_MONGODB_HOST || 'localhost'
+var dbHost = process.env.WERCKER_MONGODB_HOST || 'localhost';
 
 module.exports = {
   env: 'test',
