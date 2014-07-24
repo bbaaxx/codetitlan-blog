@@ -1,12 +1,20 @@
 {
   "styles": {
     "libs": {
-      "src": ["lib/bootstrap/dist/css/bootstrap.css"],
-      "dst": ["styles/libs.css"]
+      "src": [
+        "lib/bootstrap/dist/css/bootstrap.css"
+      ],
+      "dst": [
+        "styles/libs.dist.css"
+      ]
     },
     "main": {
-      "src": ["styles/css/main.css"],
-      "dst": ["styles/main.dist.css"]
+      "src": [
+        "styles/css/main.css"
+      ],
+      "dst": [
+        "styles/main.dist.css"
+      ]
     }
   },
   "js": {
@@ -19,7 +27,9 @@
         "lib/ember-data/ember-data.js",
         "lib/ember-localstorage-adapter/localstorage_adapter.js"
       ],
-      "dst": ["js/libs.dist.css"]
+      "dst": [
+        "js/libs.dist.js"
+      ]
     },
     "app": {
       "src": [
@@ -31,7 +41,7 @@
         "js/helpers/*.js",
         "js/controllers/*.js"
       ],
-      "dst": ["js/app.dist.js","js/templates.dist.js"]
+      "dst": ["js/app.dist.js"]
     },
     "templates": {
       "src": ["js/templates.js"],

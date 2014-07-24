@@ -114,12 +114,18 @@ gulp.task('styles', function() {
   .pipe(livereload(lrSrv))
   .pipe(notify({ message: 'Styles task complete' }));
 });
-gulp.task('buildStyles', function() {
+gulp.task('buildAppStyles', function() {
   return gulp.src(globs.scssEntry)
   .pipe(sass({ outputStyle: 'nested', sourceComments: 'normal' }))
   .pipe(autoprefixer('last 1 version'))
   .pipe(rename({ suffix: '.dist' }))
   .pipe(minifycss())
+  .pipe(gulp.dest('public/styles'));
+});
+gulp.task('buildLibsStyles', function() {
+  return gulp.src(assets.styles.libs.src.map(function(v){return 'app/'+v;}))
+  .pipe(minifycss())
+  .pipe(concat('libs.dist.css'))
   .pipe(gulp.dest('public/styles'));
 });
 
@@ -186,7 +192,8 @@ gulp.task('dev', [
 gulp.task('build', [
   'buildCleanup',
   // TODO - Create server tests tasks that stops build if fail,
-  'buildStyles',
+  'buildAppStyles',
+  'buildLibsStyles',
   'buildTemplates',
   // TODO - Include headless tests for the client,
   'buildLibsJs',

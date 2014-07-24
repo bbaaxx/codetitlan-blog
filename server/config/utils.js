@@ -44,7 +44,8 @@ exports.envAssets = function(assetsFile,env){
         for (var al in cc ){
           var cl = cc[al];
           if (al === swap) {
-            ret[at][ac] = globs.sync(cl,{cwd:'app'});
+            var fo = al === 'src' ? 'app' : 'public';
+            ret[at][ac] = globs.sync(cl,{cwd: fo});
           }
         }
       }
