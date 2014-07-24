@@ -2,8 +2,24 @@
  * server/config/env/production.js
  */
  'use strict';
-var dbString = OPENSHIFT_MONGODB_DB_HOST ? OPENSHIFT_MONGODB_DB_HOST+':'+OPENSHIFT_MONGODB_DB_PORT : 'localhost';
-var mongoOptions = OPENSHIFT_MONGODB_DB_HOST ? { user:'admin', pass: 'Qsz7v4_F7Id1' } || {};
+
+var detectPlatform = function(){
+  if(process.env.OPENSHIFT_APP_NAME) { return 'openshift'; }
+  else if(process.env.VCAP_APPLICATION) { return 'bluemix'; }
+  // TODO - Heroku
+  else { return 'local'; }
+};
+
+var makeDbString = function(platform){
+  if(platform === 'openshift') {
+    return process.env.OPENSHIFT_MONGODB_DB_URL || null;
+  } else if (platform === 'bluemix') {
+    return process.env.VCAP_SERVICES.mongolab.uri || null;
+  } else {
+    // TODO - Heroku
+    return 'mongodb://localhost/codetitlan-blog';
+  }
+};
 
 module.exports = {
   env: 'production',
@@ -15,8 +31,7 @@ module.exports = {
   ipaddr: process.env.OPENSHIFT_INTERNAL_IP || process.env.OPENSHIFT_NODEJS_IP || process.env.VCAP_APP_HOST || '127.0.0.1',
   host: process.env.HOST || process.env.VCAP_APP_HOST || 'localhost',
 	mongo: {
-    uri: 'mongodb://'+dbString+'/',
-    options: mongoOptions
+    uri: makeDbString(detectPlatform)
   },
 
 	terminatorHandlers: function() {

@@ -25,6 +25,7 @@ var clean            = require('gulp-clean'),
     livereload       = require('gulp-livereload'),
     mocha            = require('gulp-spawn-mocha'),
     plumber          = require('gulp-plumber'),
+    grimraf          = require('gulp-rimraf'),
     notify           = require('gulp-notify');
 /*
 uglify = require('gulp-uglify'),
@@ -45,12 +46,12 @@ var testNodeInstance;
 
 // Cleanup directories and files
 gulp.task('devCleanup', function() {
-  return gulp.src(['app/styles/css/*', 'app/js/templates/templates.js'], {read: false})
-    .pipe(clean());
+  return gulp.src(['app/styles/css/**/*', 'app/js/templates.js'], {read: false})
+    .pipe(grimraf());
 });
 gulp.task('buildCleanup', function() {
-  return gulp.src(['app/styles/css/*', 'app/js/templates/templates.js'], {read: false})
-    .pipe(clean());
+  return gulp.src(['public/**/*'], {read: false})
+    .pipe(grimraf());
 });
 
 // Ember Templates
@@ -66,7 +67,7 @@ gulp.task('templates', function() {
 });
 
 // Scripts
-gulp.task('jshintClientJs', function() {
+gulp.task('lintClient', function() {
   return gulp.src(globs.clientJs)
   .pipe(cache('clientJs'))
   .pipe(jshint())
@@ -74,7 +75,7 @@ gulp.task('jshintClientJs', function() {
   //.pipe(jshint.reporter('fail'))
   .pipe(livereload(lrSrv));
 });
-gulp.task('jshintServerJs', function() {
+gulp.task('lintServer', function() {
   return gulp.src(globs.serverJs)
   .pipe(cache('serverJs'))
   .pipe(jshint())
@@ -110,10 +111,10 @@ gulp.task('mocha', function(){
   .pipe(notify({message: 'Mocha tests complete !'}));
 })
 
-
 // Express Server
 gulp.task('devServer', function() {
   if (devNodeInstance) { devNodeInstance.kill(); }
+
   devNodeInstance = spawn('node', ['server.js'], { stdio: 'inherit' });
   devNodeInstance.on('close', function (code) {
     if (code === 8) {
@@ -125,9 +126,9 @@ gulp.task('devServer', function() {
 // Watch task
 gulp.task('watch',function(){
   // Trigger actions when server files change
-  gulp.watch(globs.serverJs, ['jshintServerJs','devServer']);
+  gulp.watch(globs.serverJs, ['lintServer','devServer']);
   // Trigger actions when client files change
-  gulp.watch(globs.clientJs, ['jshintClientJs']);
+  gulp.watch(globs.clientJs, ['lintClient']);
   gulp.watch(globs.emberTemplates, ['templates'])
     .on('change', function(event){
       if (event.type === 'deleted') { // if a file is deleted, forget about it
@@ -149,9 +150,16 @@ gulp.task('dev', [
   'templates',
   'devServer',
   'watch'
-  ]
-);
+  ]);
 
+gulp.task('build', [
+  'buildCleanup',
+  // TODO - Create server tests tasks that stops build if fail,
+  'styles',
+  'templates',
+  // TODO - Include headless tests for the client,
+
+  ]);
 
 
 gulp.task('default', ['dev']);

@@ -7,6 +7,8 @@
  * es: Dependencias | en: Module dependencies
  */
 var path = require('path'),
+    globs = require('globs'),
+    //async = require('async'),
     fs = require('fs');
 
 // es: Funcion para 'requerir' paquetes recursivamente
@@ -18,11 +20,35 @@ exports.walk = function(wpath, type, excludeDir, callback) {
   fs.readdirSync(wpath).forEach(function(file) {
     var newPath = path.join(wpath, file);
     var stat = fs.statSync(newPath);
-    if ( stat.isFile() && (rgx.test(file) || 
+    if ( stat.isFile() && (rgx.test(file) ||
         ( /(.*).(js|coffee)$/.test(file) ) && ~newPath.indexOf(type))) {
       callback(newPath);
     } else if (stat.isDirectory() && file !== excludeDir && ~newPath.indexOf(type)) {
       self.walk(newPath, type, excludeDir, callback);
     }
   });
+};
+
+exports.envAssets = function(assetsFile,env){
+  // TODO - Use a transform stream to do this, maybe.
+  var swap = env === 'production' ? 'dst' : 'src',
+      ao = require(assetsFile),
+      ret = {};
+  for (var at in ao) {
+    var ct = ao[at];
+    if (/js|styles/.test(at)) {
+      ret[at] = {};
+      for (var ac in ct) {
+        var cc = ct[ac];
+        ret[at][ac] = {};
+        for (var al in cc ){
+          var cl = cc[al];
+          if (al === swap) {
+            ret[at][ac] = globs.sync(cl,{cwd:'app'});
+          }
+        }
+      }
+    }
+  }
+  return ret;
 };

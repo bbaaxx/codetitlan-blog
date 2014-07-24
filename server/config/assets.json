@@ -1,0 +1,48 @@
+{
+  "styles": {
+    "libs": {
+      "src": ["lib/bootstrap/dist/css/bootstrap.css"],
+      "dst": ["styles/libs.css"]
+    },
+    "main": {
+      "src": ["styles/css/main.css"],
+      "dst": ["styles/main.css"]
+    }
+  },
+  "js": {
+    "libs": {
+      "src": [
+        "lib/jquery/dist/jquery.js",
+        "lib/bootstrap/dist/js/bootstrap.js",
+        "lib/handlebars/handlebars.js",
+        "lib/ember/ember.js",
+        "lib/ember-data/ember-data.js",
+        "lib/ember-localstorage-adapter/localstorage_adapter.js"
+      ],
+      "dst": ["js/libs.css"]
+    },
+    "app": {
+      "src": [
+        "js/app-init.js",
+        "js/store.js",
+        "js/router.js",
+        "js/routes/*.js",
+        "js/models/*.js",
+        "js/helpers/*.js",
+        "js/controllers/*.js",
+        "js/templates.js"
+      ],
+      "dst": ["js/app.js"]
+    }
+  },
+  "img": {
+    "favicon": {
+      "src": ["img/favicon.ico"],
+      "dst": ["favicon.ico"]
+    },
+    "images": {
+      "src": ["img/**/*.jpg"],
+      "dst": ["img"]
+    }
+  }
+}

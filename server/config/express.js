@@ -29,23 +29,26 @@ module.exports = function(app,passport) {
   // es: sync the env var with the app environment
   var env = app.get('env');
 
+  // Set up templating engine
+  app.set('views', config.root + '/server/views');
+  app.engine('html', consolidate[config.templateEngines]);
+  app.set('view engine', 'html');
 
+  // es: Configurar el cache, logging, directorio de vistas y opciones
+  //     dependiendo del entorno.
   // en: Setting views dir, caching and logging and options depending on env
   if ('development' === env) {
     app.set('showStackError', true);
     app.use(morgan('dev'));
-    app.set('views', config.root + '/server/views');
     app.use(express.static(path.join(config.root, 'app')));
     app.use(require('connect-livereload')());
   }
   if ('production' === env) {
-    app.set('views', config.root + '/public/views');
     app.use(compress({ level: 9 }));
     app.use(express.static(path.join(config.root, 'public')));
     app.use(favicon(config.root +  '/public/favicon.ico'));
   }
   if ('test' === env) {
-    app.set('views', config.root + '/server/views');
     app.use(function noCache(req, res, next) {
       if (req.url.indexOf('/scripts/') === 0) {
         res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -57,9 +60,6 @@ module.exports = function(app,passport) {
     app.use(express.static(path.join(config.root, 'app')));
   }
 
-  // Set up templating engine
-  app.engine('html', consolidate[config.templateEngines]);
-  app.set('view engine', 'html');
 
   // enable JSONp and use all parsing validation and override middlewares
   app.enable('jsonp callback');
@@ -68,6 +68,13 @@ module.exports = function(app,passport) {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(expressValidator());
   app.use(methodOverride());
+
+  // include assets on a var depending on env
+  app.set('assets', utils.envAssets(config.root+'/server/config/assets.json',env));
+  app.use(function(req,res,next) {
+    res.locals.assets = app.get('assets');
+    next();
+  });
 
   // Persist sessions with mongoStore
   app.use(session({
@@ -94,9 +101,10 @@ module.exports = function(app,passport) {
   app.use(flash());
 
   /*
-    Place below this comment, all middleware that runs BEFORE the routes
-    ----------------------------------------------------------------------
+    Place below this comment, all middleware that shoud run BEFORE the router
+    --------------------------------------------------------------------------
   */
+
   /*    Bootstrap routes    */
 
   function bootstrapRoutes() {
@@ -109,9 +117,10 @@ module.exports = function(app,passport) {
   }
   // TODO - somehow I don't like the way this function works
   bootstrapRoutes();
+
   /*
-    Place below this comment, all middleware that runs AFTER the routes
-    ----------------------------------------------------------------------
+    Place below this comment, all middleware that shoud run AFTER the router
+    --------------------------------------------------------------------------
   */
 
   // Assume "not found" in the error msgs is a 404. this is somewhat
