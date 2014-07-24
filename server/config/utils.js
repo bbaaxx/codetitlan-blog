@@ -30,7 +30,7 @@ exports.walk = function(wpath, type, excludeDir, callback) {
 };
 
 exports.envAssets = function(assetsFile,env){
-  // TODO - Use a transform stream to do this, maybe.
+  // TODO - Use a transform stream to do this, maybe or map at least
   var swap = env === 'production' ? 'dst' : 'src',
       ao = require(assetsFile),
       ret = {};
