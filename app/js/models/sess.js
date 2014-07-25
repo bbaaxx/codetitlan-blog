@@ -4,7 +4,7 @@
 (function(){
   'use strict';
 
-  var attr = DS.attr;
+  /*var attr = DS.attr;
 
   App.User = DS.Model.extend({
 
@@ -29,7 +29,7 @@
       'provider':'local',
       'roles':['authenticated']
     }
-  ];
+  ];*/
 
 
 })();

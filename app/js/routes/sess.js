@@ -5,19 +5,22 @@
 (function(){
   'use strict';
 
-  App.SessRoute = Ember.Route.extend({
-    //
-  });
-
-  App.SessSignupRoute = Ember.Route.extend({
-    model: function(){
-      return this.store.createRecord('signup');
-    },
+  /*App.SessSigninRoute = Ember.Route.extend({
     renderTemplate: function() {
-      this.render('users.signup', {
-        controller: 'usersSignup'
+      this.render('sess.signin', {
+        controller: 'sessSignin'
       });
     }
   });
+
+
+  App.SessSignupRoute = Ember.Route.extend({
+
+    renderTemplate: function() {
+      this.render('sess.signup', {
+        controller: 'sessSignup'
+      });
+    }
+  });*/
 
 })();

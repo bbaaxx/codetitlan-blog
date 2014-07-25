@@ -5,6 +5,7 @@
 (function(){
   'use strict';
 
+  /*
   App.SessController = Ember.ArrayController.extend({
 
 
@@ -40,7 +41,11 @@
           });
       }
     }
-  });
+  });*/
+
+
+
+
 
 
 

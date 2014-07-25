@@ -31,7 +31,7 @@ var gutil          = require('gulp-util'),
 
 // Get the assets file
 // TODO - Fully integrate the assets file with build system
-var assets = require('server/config/assets');
+var assets = require('./server/config/assets');
 
 var globs = {
   clientJs: ['app/js/**/*.js', '!app/js/templates.js'],

@@ -17,7 +17,7 @@
 
   // This is a temporal configuarion during stabilization of auth
   App.ApplicationAdapter = DS.LSAdapter;
-  App.UserAdapter = DS.RESTAdapter;
+  //App.SessAdapter = DS.RESTAdapter;
 
 
 })();
