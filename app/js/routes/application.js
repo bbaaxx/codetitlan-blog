@@ -13,7 +13,7 @@
         menus: {
           main: ['dudes','posts']
         },
-        appName: 'KYE App',
+        appName: 'Codetitlan',
         console: {
           userObj: JSON.stringify(window.user),
           mdrnObj: JSON.stringify(window.Modernizr)
