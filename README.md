@@ -10,39 +10,61 @@ An evolving full-stack javascript application platform (mainly for blogging) bui
 
 The platform will have a blogging application logic programmed out of the box but if you get a little understanding of what's going on with the code, it is possible to actually use it for pretty much any web application pattern.
 
+Stating on Alpha 0.3.0 you can easily deploy it to a free Openshift instance with a few commands.
+
 ## Current version
 
-##### 0.2.0-Alpha_1
-  * Basic server side functionality, it delivers the single page Ember app.
-  * Basic passport auth on the server side
-  * Testing harness (sounds nicer than suite) for the server side with mocha
-  * Basic client side structure
-  * ... lots and lots of scaffolding code
+##### 0.3.0-Alpha
+  * Basic and messy but functional build system
+  * Easy-cheesy deployment for Openshift (read Openshift section)
+  * Minor bug fixes on the server code
 
 #### In the next release ...
-  * End-to-end authentication with oAuth providers
+  * Fully functional client side auth
   * Posts functionality
-  * Administrative interface blueprint
   
 #### In the near future (beta_1)...
+  * Administrative interface
+  * End-to-end authentication with oAuth providers
   * ES6 Syntax support on the build system
   * Code richely documented in both english, spanish and probably french too
-  * Build system for easy-cheesy deployment at Openshift, BlueMix and of course Heroku
+  * Easy-cheesy deployment for BlueMix and Heroku
   * Role-based auth
   * NPM distribution
   * ...more scaffolding code
 
 
-## Install it, develop on it and use it
+## Super quick guide
 
-Soon to be available via NPM but for now, just clone the repo and:
+Clone the repo and:
 
-    $ npm install
-    $ npm start
+    $ npm install && bower install
+    $ gulp
 
-And you are good to go.
+And you are good to go for local development.
 
-There is no fancy CLI for the platform, but the structure of the app will hopefully guide you while we release a stable version that can be properly documented.
+No fancy CLI on this one, but follow the comments on the code and they will hopefully guide you while we release a stable version and can focus on documentation.
+
+### Deploying to Openshift
+Due to some [frankly unexplainable configuration](https://github.com/wshearn/openshift-origin-cartridge-nodejs/commit/8de18f9962b9b39d5bf46192707bc91879853f6d) on the "official" Nodejs Cartdridges at Openshift, you need to create your app using a custom one, so get your free account, install the [OpenShift Client Tools](https://www.openshift.com/developers/rhc-client-tools-install) and then go like:
+
+    $ rhc create-app <APP_NAME> "http://cartreflect-claytondev.rhcloud.com/reflect?github=wshearn/openshift-origin-cartridge-nodejs" mongodb-2.4 NPM_CONFIG_PRODUCTION="true"
+
+Once that command is done, check the output for your *git remote* uri and paste it somewhere, then : 
+
+    $ cd APP_NAME
+    $ git remote rm origin
+    $ git remote add origin https://github.com/bbaaxx/codetitlan-blog
+    $ git remote add openshift <paste_your_openshift_git_remote_here>
+    $ git fetch
+    $ git reset --hard origin/master
+    $ git push openshift master --force
+
+And that's it, you can go to your openshift app url and see the welcome page.
+
+If you are curious, you might want to know that the package is [patched with this](https://github.com/ramr/nodejs-custom-version-openshift.git).
+
+## Quick Guide
 
 ## Issues and contributing
 Please feel free to open issues for questions related to the development, and improving of the platform but please excuse us if we cannot help too much with the deployment for now (until the build system is implemented in beta_1.
