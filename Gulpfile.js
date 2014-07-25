@@ -55,10 +55,15 @@ gulp.task('buildCleanup', function() {
 });
 
 // Ember Templates
+// Set the slash direction backwards for template names if in windows
+// and apply only for dev 
+var templatesOptions = /^win/.test(process.platform) ? {
+      name: { replace: /\\/g, with: '/' }
+    } : {};
 gulp.task('templates', function() {
   return gulp.src(globs.emberTemplates)
   .pipe(cache('templates'))
-  .pipe(emberTemplates())
+  .pipe(emberTemplates(templatesOptions))
   .pipe(remember('templates'))
   .pipe(concat('templates.js'))
   .pipe(gulp.dest('app/js'))
