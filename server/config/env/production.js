@@ -5,7 +5,6 @@
 
 var detectPlatform = function(){
   if(process.env.OPENSHIFT_APP_NAME) { return 'openshift'; }
-  if(process.env.OPENSHIFT_MONGODB_DB_URL) { return 'openshift'; }
   else if(process.env.VCAP_APPLICATION) { return 'bluemix'; }
   // TODO - Heroku
   else { return 'local'; }
@@ -23,7 +22,6 @@ var makeDbString = function(platform){
 };
 
 module.exports = {
-
   env: 'production',
   app: {
       name: 'Codetitilan Application Server'
@@ -48,7 +46,6 @@ module.exports = {
       }
       console.warn('%s: Node server stopped.', Date(Date.now()) );
     };
-
     process.on('exit', function() { terminator(); });
     signals.forEach(function(sig) {
         process.on(sig, function() { terminator(sig); });
